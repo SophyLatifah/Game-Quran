@@ -1,36 +1,43 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// import halaman
-import AdminDashboard from "./pages/admin/dashboardadmin";
-import ManageSoal from "./pages/admin/managesoal";
-import UserDashboard from "./pages/user/dashboard";
-import Hijaiyah from "./pages/user/hijaiyah";
-import Statistik from "./pages/user/statistik";
-import Login from "./pages/auth/login";
-import Signup from "./pages/auth/signup";
+// // import halaman
+// -----LANDINGPAGE------ //
+import LandingPage from "./pages/Landing/landingpage.jsx"
 
-// import komponen
-import Navbar from "./component/navbar";
+// // -----ADMIN----- //
+// import AdminDashboard from "./pages/admin/dashboardadmin";
+// import ManageSoal from "./pages/admin/managesoal";
+
+// -----USER------ //
+// import UserDashboard from "./pages/user/dashboard";
+// import Hijaiyah from "./pages/user/hijaiyah";
+// import Statistik from "./pages/user/statistik";
+
+// // -----AUTH----- //
+// import Login from "./pages/auth/login";
+// import Signup from "./pages/auth/signup";
+
+// // import komponen
+// import Navbar from "./component/navbar";
 
 function App () {
   return (
-    <Router>
-      <Navbar />
+    <>
+      {/* <Navbar /> */}
       <Routes>
         {/* AUTH */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup/>} />
+          
+        {/* LANDINGPAGE */}
+        <Route path="/" element= {<LandingPage />} />
 
         {/* USER */}
-          <Route path="/user" element={<UserDashboard/>} />
-          <Route path="/user/hijaiyah" element={<Hijaiyah/>} />
-          <Route path="/user/statistik" element={<Statistik/>} />
+          {/* <Route path="/" element={<UserDashboard/>} /> */}
+          
 
         {/* ADMIN */}
-           <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/soal" element={<ManageSoal />} />
+          
       </Routes>
-    </Router>
+    </>
   );
 }
 
