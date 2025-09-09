@@ -18,12 +18,12 @@ import LandingPage from "./pages/Landing/landingpage.jsx"
 // import Signup from "./pages/auth/signup";
 
 // // import komponen
-// import Navbar from "./component/navbar";
+import Navbar from "./component/navbar";
 
 function App () {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         {/* AUTH */}
           
