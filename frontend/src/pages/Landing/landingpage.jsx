@@ -47,8 +47,9 @@
 // export default LandingPage;
 
 import React from "react";
-import { Link } from "react-router-dom";
-// import { Motion } from "framer-motion";
+import { Link, NavLink } from "react-router-dom";
+import Button from "../../component/button";
+// import { motion } from "framer-motion";
 
 {/* Gambar */}
 import alquran from "../../assets/alquran.png";
@@ -70,18 +71,18 @@ function LandingPage() {
             <h1 className="text-4xl   md:text-5xl font-extrabold text-white leading-tight">
               DEEN <span className="text-[#FF9102]">QUIZ</span>
             </h1>
-            <h2 className="mt-6 text-2xl text-gray-200 font-bold">
+            <h2 className="mt-6 text-2xl text-gray-200 font-bold ">
               Game edukasi seputar Islam, belajar jadi lebih seru!
             </h2>
-            <p className="mt-4 text-gray-200">
+            <p className="mt-4 text-gray-200 py-10">
               DEEN QUIZ menghadirkan berbagai seri kuis interaktif: dari huruf hijaiyah, sejarah nabi dan rasul, hingga pengetahuan Islam sehari-hari. Cocok untuk semua usia.
             </p>
 
-            <Link to="/login">
-              <button className="mt-8 px-6 py-3 bg-[#FF9102] hover:bg-amber-600 text-white font-semibold rounded-full shadow-lg transition">
+          <Button>
+            <Link to="/login" className="mt-8 px-6 py-3 bg-[#FF9102] hover:bg-amber-600 text-white font-semibold rounded-full shadow-lg transition">
                 Mulai Belajar
-              </button>
             </Link>
+          </Button>
           </div>
 
           {/* Hero Image */}
@@ -153,11 +154,13 @@ function LandingPage() {
       </section>
 
       {/* 3 */}
-      <section className="flex bg-[#4B0E86] py-10 ">
+      <section className="flex bg-[#4B0E86] py-20 px-10">
         <div>
         <h2 className="text-white text-3xl text-center font-bold">Apa Kata Mereka?</h2>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6 mt-10">
+
+          {/* testi 1 */}
           <div className="bg-white shadow-md p-6 rounded-xl">
             <p className="text-gray-600 italic">
             "Anak saya jadi lebih semangat mengenal huruf hijaiyah. Belajar sambil main game."
@@ -168,6 +171,7 @@ function LandingPage() {
             </div>
           </div>
 
+          {/* testi 2 */}
           <div className="bg-white shadow-md p-6 rounded-xl">
             <p className="text-gray-600 italic">"Asyik banget! Bisa belajar Islam sambil kuis bareng teman-teman."</p>
             <div className="mt-4 flex items-center space-x-3">
@@ -176,6 +180,7 @@ function LandingPage() {
             </div>
           </div>
 
+          {/* testi 3 */}
           <div className="bg-white shadow-md p-6 rounded-xl">
             <p className="text-gray-600 italic">"Kontennya sederhana tapi bermanfaat. Saya jadi bisa belajar bareng keluarga."</p>
             <div className="mt-4 flex items-center space-x-3">
@@ -188,15 +193,16 @@ function LandingPage() {
       </section>
 
     {/* 4 */}
-      <section className="flex items-center mt-10">
-        <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center">
-        <div className="flex-1 text-center lg:text-left">
-          <h2>“Dengan bismillah, mari jadikan belajar Islam lebih menyenangkan melalui kuis interaktif yang seru dan mudah diakses.”</h2>
-          <h3>“Ajak keluarga belajar bersama, karena ilmu adalah warisan terbaik.”</h3>
+      <section className="flex items-center py-20 justify-center bg-[url('/src/assets/bg.jpg')] bg-cover bg-center min-h-screen">
+        <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center text-center ">
+        <div className="flex-1 text-center">
+          <h2 className="font-bold text-2xl text-center text-white">“Dengan bismillah, mari jadikan belajar Islam lebih menyenangkan melalui kuis interaktif yang seru dan mudah diakses.”</h2>
+
+          <h3 className="mt-10 text-center">“Ajak keluarga belajar bersama, karena ilmu adalah warisan terbaik.”</h3>
 
           <Link to="/login">
               <button className="mt-8 px-6 py-3 bg-[#FF9102] hover:bg-amber-600 text-white font-semibold rounded-full shadow-lg transition">
-                Mulai Belajar
+                Bismillah Mulai
               </button>
             </Link>
         </div>
@@ -204,7 +210,10 @@ function LandingPage() {
         </div>
       </section>
 
-
+    {/* Footter */}
+    <section className="bg-[#FF9102]">
+    <p className="text-center text-white">© {new Date().getFullYear()} DEEN QUIZ. Semua Hak Dilindungi.</p>
+    </section>
     </div>
   );
 }

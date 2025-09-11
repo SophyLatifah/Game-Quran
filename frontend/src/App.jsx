@@ -9,13 +9,13 @@ import LandingPage from "./pages/Landing/landingpage.jsx"
 // import ManageSoal from "./pages/admin/managesoal";
 
 // -----USER------ //
-// import UserDashboard from "./pages/user/dashboard";
-// import Hijaiyah from "./pages/user/hijaiyah";
+import UserDashboard from "./pages/user/dashboard";
+import Hijaiyah from "./pages/user/hijaiyah";
 // import Statistik from "./pages/user/statistik";
 
 // // -----AUTH----- //
-// import Login from "./pages/auth/login";
-// import Signup from "./pages/auth/signup";
+import Login from "./pages/auth/login";
+import Signup from "./pages/auth/signup";
 
 // // import komponen
 import Navbar from "./component/navbar";
@@ -23,16 +23,26 @@ import Navbar from "./component/navbar";
 function App () {
   return (
     <>
-      <Navbar />
       <Routes>
         {/* AUTH */}
+        
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        
           
+
         {/* LANDINGPAGE */}
-        <Route path="/" element= {<LandingPage />} />
+        <Route path="/" element= {
+          <>
+          <Navbar />
+          <LandingPage />
+          </>
+        }
+        />
 
         {/* USER */}
-          {/* <Route path="/" element={<UserDashboard/>} /> */}
-          
+        <Route path="/dashboard" element={<UserDashboard/>} />
+        <Route path="/hijaiyah" element={<Hijaiyah/>} />
 
         {/* ADMIN */}
           
