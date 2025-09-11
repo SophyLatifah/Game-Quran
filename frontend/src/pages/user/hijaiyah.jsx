@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 
+{/* import audio */}
+import alif from "../../assets/audio/hijaiyah/alif.mp3";
+import ba from "../../assets/audio/hijaiyah/ba.mp3";
+import ta from "../../assets/audio/hijaiyah/ta.mp3";
+import tsa from "../../assets/audio/hijaiyah/tsa.mp3";
+import jim from "../../assets/audio/hijaiyah/jim.mp3";
+import Ḥāʼ from "../../assets/audio/hijaiyah/Ḥāʼ.mp3";
+
 // contoh data hijaiyah
 const hijaiyahData = [
-  { huruf: "ا", nama: "Alif", audio: "/audio/hijaiyah/alif.mp3" },
-  { huruf: "ب", nama: "Ba", audio: "/audio/hijaiyah/ba.mp3" },
-  { huruf: "ت", nama: "Ta", audio: "/audio/hijaiyah/ta.mp3" },
-  { huruf: "ث", nama: "Tsa", audio: "/audio/hijaiyah/tsa.mp3" },
-  // tambahin sesuai kebutuhan...
+  { huruf: "ا", nama: "Alif", audio: alif },
+  { huruf: "ب", nama: "Ba", audio: ba },
+  { huruf: "ت", nama: "Ta", audio: ta },
+  { huruf: "ث", nama: "Tsa", audio: tsa },
+  { huruf: "ج", nama: "Jim", audio: jim },
+  { huruf: "ح", nama: "Ḥāʼ", audio: Ḥāʼ },
 ];
 
 function Hijaiyah() {

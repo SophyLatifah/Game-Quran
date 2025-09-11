@@ -1,54 +1,7 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-
-// function LandingPage() {
-//   return (
-//     <div style={{ padding: "20px" }}>
-//     {/*HERO SECTION*/}
-//     <section className="bg-[#4B0E86] min-h-screen flex items-center">
-//       <div>
-
-//       </div>
-//       <h1 className="">Selamat Datang di Game Edukasi Quran!</h1>
-//       <p>Cara mudah dan interaktif untuk mempelajari bacaan Al-Quran</p>
-//         <Link to="/login">
-//           <button className="">
-//             Mulai Belajar
-//           </button>
-//         </Link>
-//     </section>
-      
-//     <section>
-//       <h2>Tahukah Anda?</h2>
-//       <h2>Al-Qur'an terdiri dari banyak kata yang dibangun dari huruf <b>Hijaiyah</b>. 
-//       Mari kita pelajari huruf-hurufnya sebagai langkah pertama!</h2>
-//     </section>
-
-//     <section>
-//       <h2>Mulailah perjalanan Anda dengan mempelajari huruf-huruf hijaiyah, pondasi pertama dalam membaca Al-Qur’an.</h2>
-//       <Link to="/login">
-//           <button>Mulai Belajar
-//           </button>
-//       </Link>
-//     </section>
-
-//     <section>
-//       <h2>Dalam 15 menit, Anda bisa merasakan kegembiraan.</h2>
-//     </section>
-  
-//     <section>
-//       <h2>Perubahan positif yang tidak biasa setelah Anda memahami al-Quran:</h2>
-//     </section>
-
-//     </div>
-//   );
-// }
-
-// export default LandingPage;
-
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Button from "../../component/button";
+import Lottie from "lottie-react";
 // import { motion } from "framer-motion";
 
 {/* Gambar */}
@@ -58,6 +11,10 @@ import user1 from "../../assets/user1.jpg";
 import user2 from "../../assets/user2.jpg";
 import user3 from "../../assets/user3.jpg";
 
+{/* Icons */}
+import seri2 from "../../assets/icons/seri2.json";
+import seri1 from "../../assets/icons/seri1.json";
+import seri3 from "../../assets/icons/seri3.json";
 
 
 function LandingPage() {
@@ -69,13 +26,13 @@ function LandingPage() {
           {/* Text Content */}
           <div className="flex-1 text-center lg:text-left">
             <h1 className="text-4xl   md:text-5xl font-extrabold text-white leading-tight">
-              DEEN <span className="text-[#FF9102]">QUIZ</span>
+              DEEN <span className="text-[#FF9102] ">QUIZ</span>
             </h1>
             <h2 className="mt-6 text-2xl text-gray-200 font-bold ">
               Game edukasi seputar Islam, belajar jadi lebih seru!
             </h2>
             <p className="mt-4 text-gray-200 py-10">
-              DEEN QUIZ menghadirkan berbagai seri kuis interaktif: dari huruf hijaiyah, sejarah nabi dan rasul, hingga pengetahuan Islam sehari-hari. Cocok untuk semua usia.
+              DEEN QUIZ menghadirkan berbagai seri kuis interaktif: dari huruf hijaiyah, kisah nabi dan rasul, hingga pengetahuan Islam sehari-hari. Cocok untuk semua usia.
             </p>
 
           <Button>
@@ -120,6 +77,8 @@ function LandingPage() {
             </ul>
           </div>
         </div>
+
+        
       </section>
 
       {/* 2 */}
@@ -132,22 +91,43 @@ function LandingPage() {
 
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 max-w-6xl px-5 pb-12 mx-auto">
           {/* cards 1 */}
-            <div className="p-6 rounded-lg shadow-2xl bg-white transform transition duration-300 hover:scale-105">
+            <div className="p-6 rounded-3xl shadow-2xl bg-white transform transition duration-300 hover:scale-105 flex flex-col items-center">
               <h2 className="text-center font-bold text-[#5707A4] text-xl">Seri Hijaiyah</h2>
               <br />
               <h3>Belajar huruf hijaiyah lewat kuis interaktif yang menyenangkan.</h3>
+
+            <Lottie 
+              animationData={seri1} 
+              loop={true} 
+              className="w-32 h-32 mt-10"
+            />
+
             </div>
 
           {/* Cards 2 */}
-          <div className="p-6 rounded-lg shadow-2xl bg-white transform transition duration-300 hover:scale-105">
+          <div className="p-6 rounded-3xl shadow-2xl bg-white transform transition duration-300 hover:scale-105 flex flex-col items-center">
             <h2 className="text-center font-bold text-[#5707A4] text-xl">Seri Kisah Nabi & Rasul <span className="text-[#FF9102]"><br /> (Coming Soon) </span></h2>
             <h3>Kenali kisah para nabi dan rasul lewat pertanyaan seru.</h3>
+
+            <Lottie 
+              animationData={seri2} 
+              loop={true} 
+              className="w-32 h-32 mt-10"
+            />
+
           </div>
 
           {/* Cards 3 */}
-          <div className="p-6 rounded-lg shadow-2xl bg-white transform transition duration-300 hover:scale-105">
+          <div className="p-6 rounded-3xl shadow-2xl bg-white transform transition duration-300 hover:scale-105 flex flex-col items-center">
             <h2 className="text-center font-bold text-[#5707A4] text-xl">Seri Tajwid <span className="text-[#FF9102]"><br />(Coming Soon)</span></h2>
             <h3>Belajar aturan membaca Al-Qur'an dengan kuis singkat dan mudah dipahami.</h3>
+
+          <Lottie 
+            animationData={seri3} 
+            loop={true} 
+            className="w-32 h-32 mt-10"
+          />
+
           </div>
         </div>
         </div>
@@ -198,7 +178,7 @@ function LandingPage() {
         <div className="flex-1 text-center">
           <h2 className="font-bold text-2xl text-center text-white">“Dengan bismillah, mari jadikan belajar Islam lebih menyenangkan melalui kuis interaktif yang seru dan mudah diakses.”</h2>
 
-          <h3 className="mt-10 text-center">“Ajak keluarga belajar bersama, karena ilmu adalah warisan terbaik.”</h3>
+          <h3 className="mt-10 text-center font-bold">“Ajak keluarga belajar bersama, karena ilmu adalah warisan terbaik.”</h3>
 
           <Link to="/login">
               <button className="mt-8 px-6 py-3 bg-[#FF9102] hover:bg-amber-600 text-white font-semibold rounded-full shadow-lg transition">

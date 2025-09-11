@@ -1,17 +1,3 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-
-// function Dashboard() {
-//   return (
-//     <div style={{ padding: "20px" }}>
-//       <h1 className="mt-16">Selamat Datang di Game Edukasi Quran!</h1>
-//     </div>
-//   );
-// }
-
-// export default Dashboard;
-
-
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -20,10 +6,15 @@ function Dashboard() {
     <div className="min-h-screen bg-gray-100 font-sans">
       {/* Header */}
       <header className="bg-[#4B0E86] text-white p-4 flex justify-between items-center">
-        <h1 className="text-lg font-bold">DEEN QUIZ</h1>
-        <button className="bg-[#FF9102] px-3 py-1 rounded-full text-sm font-semibold">
-          Profil
-        </button>
+        <h1 className="text-lg font-extrabold">DEEN QUIZ</h1>
+
+        <Link
+          to="/"
+          className="bg-[#FF9102] px-5 py-2 rounded-full text-sm font-bold text-center"
+        >
+        Logout
+        </Link>
+      
       </header>
 
       {/* Progress Belajar */}
@@ -51,20 +42,23 @@ function Dashboard() {
           </Link>
 
           {/* Card 2 */}
-          <Link to="/tajwid" className="bg-white shadow-md p-4 rounded-xl text-center hover:scale-105 transition">
+          <Link to="" className="bg-white shadow-md p-4 rounded-xl text-center hover:scale-105 transition">
             <h3 className="font-semibold text-[#5707A4]">Tajwid</h3>
+            <h2 className="font-bold text-[#FF9102]">(Coming Soon)</h2>
             <p className="text-xs text-gray-500 mt-1">Aturan bacaan</p>
           </Link>
 
           {/* Card 3 */}
-          <Link to="/kisah" className="bg-white shadow-md p-4 rounded-xl text-center hover:scale-105 transition">
+          <Link to="" className="bg-white shadow-md p-4 rounded-xl text-center hover:scale-105 transition">
             <h3 className="font-semibold text-[#5707A4]">Kisah Nabi</h3>
+            <h2 className="font-bold text-[#FF9102]">(Coming Soon)</h2>
             <p className="text-xs text-gray-500 mt-1">Inspirasi iman</p>
           </Link>
 
           {/* Card 4 */}
-          <Link to="/daily" className="bg-white shadow-md p-4 rounded-xl text-center hover:scale-105 transition">
+          <Link to="" className="bg-white shadow-md p-4 rounded-xl text-center hover:scale-105 transition">
             <h3 className="font-semibold text-[#5707A4]">Doa Harian</h3>
+            <h2 className="font-bold text-[#FF9102]">(Coming Soon)</h2>
             <p className="text-xs text-gray-500 mt-1">Doa & dzikir</p>
           </Link>
         </div>
