@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
 
 function Signup() {
+
+  const stars = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      delay: Math.random() * 3,
+    }));
+
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -42,7 +53,33 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#4B0E86] px-6 ">
+    <div className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-[#1a103d] via-[#2e1a63] to-[#4b0e86] overflow-hidden px-6 ">
+
+      {/* Bintang */}
+        {stars.map((star) => (
+         <motion.div
+          key={star.id}
+          className="absolute bg-white rounded-full"
+          style={{
+            top: `${star.top}%`,
+            left: `${star.left}%`,
+            width: star.size,
+            height: star.size,
+          }}
+          animate={{ opacity: [1, 0.2, 1] }}
+          transition={{
+            duration: 2 + Math.random() * 2,
+            repeat: Infinity,
+            delay: star.delay,
+          }}
+          />
+          ))} 
+      
+      
+            {/* Glow bulat */}
+              <div className="absolute top-20 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"></div>
+              <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+
       <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md mt-10">
         
      {/* Tombol X */}

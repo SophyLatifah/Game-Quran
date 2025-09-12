@@ -2,15 +2,16 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Button from "../../component/button";
 import Lottie from "lottie-react";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 {/* Gambar */}
-import alquran from "../../assets/alquran.png";
+//import alquran from "../../assets/alquran.png";
 // import picture1 from "../../assets/picture1.png";
 import user1 from "../../assets/user1.jpg";
 import user2 from "../../assets/user2.jpg";
 import user3 from "../../assets/user3.jpg";
 import maskot from "../../assets/maskot.png";
+import maskot1 from "../../assets/maskot1.png"
 
 {/* Icons */}
 import seri2 from "../../assets/icons/seri2.json";
@@ -19,44 +20,114 @@ import seri3 from "../../assets/icons/seri3.json";
 
 
 function LandingPage() {
+
+  const stars = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    top: Math.random() * 100,
+    left: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    delay: Math.random() * 3,
+  }));
+
   return (
     <div className="mt-16 font-sans">
+    
       {/* HERO SECTION */}
-      <section className="bg-[#4B0E86] min-h-screen flex">
-        <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center">
-          {/* Text Content */}
+      <section className="relative bg-gradient-to-br from-[#1a103d] via-[#2e1a63] to-[#4b0e86] overflow-hidden min-h-screen flex">
+
+        {/* Bintang */}
+        {stars.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute bg-white rounded-full"
+            style={{
+              top: `${star.top}%`,
+              left: `${star.left}%`,
+              width: star.size,
+              height: star.size,
+            }}
+            animate={{ opacity: [1, 0.2, 1] }}
+            transition={{
+              duration: 2 + Math.random() * 2,
+              repeat: Infinity,
+              delay: star.delay,
+            }}
+          />
+        ))}
+
+        {/* Glow bulat */}
+        <div className="absolute top-20 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"></div>
+        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+
+        {/* Konten */}
+        <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center relative z-10">
           <div className="flex-1 text-center lg:text-left">
-            <h1 className="text-4xl   md:text-5xl font-extrabold text-white leading-tight">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight">
               DEEN <span className="text-[#FF9102] ">QUIZ</span>
             </h1>
             <h2 className="mt-6 text-2xl text-gray-200 font-bold ">
               Game edukasi seputar Islam, belajar jadi lebih seru!
             </h2>
             <p className="mt-4 text-gray-200 py-10">
-              DEEN QUIZ menghadirkan berbagai seri kuis interaktif: dari huruf hijaiyah, kisah nabi dan rasul, hingga pengetahuan Islam sehari-hari. Cocok untuk semua usia.
+              DEEN QUIZ menghadirkan berbagai seri kuis interaktif: dari huruf
+              hijaiyah, kisah nabi dan rasul, hingga pengetahuan Islam sehari-hari.
+              Cocok untuk semua usia.
             </p>
 
-          <Button>
-            <Link to="/login" className="mt-8 px-6 py-3 bg-[#FF9102] hover:bg-amber-600 text-white font-semibold rounded-full shadow-lg transition">
+            <Button>
+              <Link
+                to="/login"
+                className="mt-8 px-6 py-3 bg-[#FF9102] hover:bg-amber-600 text-white font-semibold rounded-full shadow-lg transition"
+              >
                 Mulai Belajar
-            </Link>
-          </Button>
+              </Link>
+            </Button>
           </div>
 
-          {/* Hero Image */}
           <div className="flex-1 mt-20 lg:mt-0 flex justify-center">
-            <img
-              src={alquran}
-              alt="Game Edukasi Quran"
-              className="max-w-xs md:max-w-md drop-shadow-2xl"
-            />
+          <motion.img
+            src={maskot1}
+            alt="Game Edukasi Quran"
+            className="max-w-xs md:max-w-md drop-shadow-2xl"
+            animate={{ y: [0, -20, 0] }}   // gerakan naik turun
+            transition={{
+              duration: 4,                  // lama sekali cycle
+              repeat: Infinity,             // ulang terus
+              ease: "easeInOut"
+            }}
+          />
           </div>
         </div>
       </section>
 
       {/* 1 */}
-      <section className="bg-[#5707A4] min-h-scree flex items-center">
+      <section className="relative bg-gradient-to-br from-[#4b0e86] via-[#2e1a63] to-[#1a103d] overflow-hidden min-h-scree flex items-center">
         <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center">
+
+         {/* Bintang */}
+        {stars.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute bg-white rounded-full"
+            style={{
+              top: `${star.top}%`,
+              left: `${star.left}%`,
+              width: star.size,
+              height: star.size,
+            }}
+            animate={{ opacity: [1, 0.2, 1] }}
+            transition={{
+              duration: 2 + Math.random() * 2,
+              repeat: Infinity,
+              delay: star.delay,
+            }}
+          />
+        ))}
+
+        {/* Glow bulat */}
+        <div className="absolute top-20 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"></div>
+        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+
 
           {/* Gambar */}
            <div className="flex-1 mt-20 lg:mt-0 flex justify-center">
@@ -86,6 +157,7 @@ function LandingPage() {
       {/* 2 */}
       <section className="min-h-scree flex bg-gray-100 ">
         <div className="container mx-auto px-6 flex flex-col items-center mt-10">
+
           {/* Teks */}
             <div>
               <h1 className="text-xl md:text-4xl font-extrabold text-[#5707A4] leading-tight text-center">Mulai Belajar dengan Seri Permainan Favoritmu</h1>
@@ -136,7 +208,7 @@ function LandingPage() {
       </section>
 
       {/* 3 */}
-      <section className="flex bg-[#4B0E86] py-20 px-10">
+      <section className="flex bg-[#4B0E86] py-20 px-10 ">
         <div>
         <h2 className="text-white text-3xl text-center font-bold">Apa Kata Mereka?</h2>
 

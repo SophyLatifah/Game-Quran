@@ -1,7 +1,18 @@
 import  { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import Lottie from "lottie-react";
+import { motion } from "framer-motion";
 
 function Login() {
+
+  const stars = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    top: Math.random() * 100,
+    left: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    delay: Math.random() * 3,
+  }));
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -36,25 +47,51 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#4B0E86] px-6">    
+    <div className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-[#1a103d] via-[#2e1a63] to-[#4b0e86] overflow-hidden px-6">   
+
+    {/* Bintang */}
+      {stars.map((star) => (
+        <motion.div
+          key={star.id}
+          className="absolute bg-white rounded-full"
+          style={{
+            top: `${star.top}%`,
+            left: `${star.left}%`,
+            width: star.size,
+            height: star.size,
+          }}
+          animate={{ opacity: [1, 0.2, 1] }}
+          transition={{
+            duration: 2 + Math.random() * 2,
+            repeat: Infinity,
+             delay: star.delay,
+          }}
+          />
+        ))} 
+
+
+      {/* Glow bulat */}
+        <div className="absolute top-20 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"></div>
+        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
     
-      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md relative">
+      <div className=" relative 
+                bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg p-8 w-full max-w-md relative">
 
     {/* Tombol X */}
       <Link
         to="/"
-        className="absolute top-6 text-black text-3xl font-bold hover:text-gray-600"
+        className="absolute top-6 text-white text-3xl font-bold hover:text-gray-300"
       >
           ✕
       </Link>
 
-        <h2 className="text-2xl font-bold text-center text-[#4B0E86]">Login</h2>
-        <p className="text-gray-600 text-center mt-2">Masuk untuk mulai belajar 📖</p>
+        <h2 className="text-2xl font-bold text-center text-[#FF9102]">Sign In</h2>
+        <p className="text-gray-200 text-center mt-2">Masuk untuk mulai belajar 📖</p>
 
         <form onSubmit={handleSubmit} className="mt-6">
           {/* Email */}
           <div>
-            <label className="block text-gray-700">Email</label>
+            <label className="block text-gray-100">Email</label>
             <input
               type="email"
               placeholder="Masukkan email"
@@ -67,7 +104,7 @@ function Login() {
 
           {/* Password */}
           <div className="mt-4">
-            <label className="block text-gray-700">Password</label>
+            <label className="block text-gray-100">Password</label>
             <input
               type="password"
               placeholder="Masukkan password"
@@ -81,16 +118,16 @@ function Login() {
           {/* Tombol Login */}
           <button
             type="submit"
-            className="w-full mt-6 bg-[#FF9102] hover:bg-amber-600 text-white py-3 rounded-lg font-semibold shadow-lg transition"
+            className="w-full mt-6 bg-[#ff9102] hover:bg-amber-600 text-white py-3 rounded-lg font-semibold shadow-lg transition"
           >
             Login
           </button>
         </form>
 
         {/* Link ke register */}
-        <p className="text-center text-gray-600 mt-6">
+        <p className="text-center text-gray-300 mt-6">
           Belum punya akun?{" "}
-          <Link to="/signup" className="text-[#4B0E86] font-semibold hover:underline">
+          <Link to="/signup" className="text-white font-semibold hover:underline">
             Daftar
           </Link>
         </p>
