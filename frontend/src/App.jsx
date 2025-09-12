@@ -12,6 +12,7 @@ import LandingPage from "./pages/Landing/landingpage.jsx"
 import UserDashboard from "./pages/user/dashboard";
 import Hijaiyah from "./pages/user/hijaiyah";
 import Statistik from "./pages/user/statistik";
+import Game from "./pages/user/game";
 
 // // -----AUTH----- //
 import Login from "./pages/auth/login";
@@ -57,10 +58,18 @@ function App () {
           } 
           />
 
-           <Route path="/statistik" element={
+          <Route path="/statistik" element={
           <>
           <GameNav /> 
           <Statistik /> 
+          </>
+          } 
+          />
+
+          <Route path="/game" element={
+          <>
+          <GameNav /> 
+          <Game /> 
           </>
           } 
           />

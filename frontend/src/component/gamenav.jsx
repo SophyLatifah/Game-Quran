@@ -33,8 +33,8 @@ export default function GameNavbar() {
         </Link>
 
         <Link
-          to="/games"
-          className={`flex flex-col items-center ${getActiveClass("/games")}`}
+          to="/game"
+          className={`flex flex-col items-center ${getActiveClass("/game")}`}
         >
           <Gamepad2 size={24} />
           <span className="text-xs">Permainan</span>

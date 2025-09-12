@@ -6,10 +6,11 @@ import Lottie from "lottie-react";
 
 {/* Gambar */}
 import alquran from "../../assets/alquran.png";
-import picture1 from "../../assets/picture1.png";
+// import picture1 from "../../assets/picture1.png";
 import user1 from "../../assets/user1.jpg";
 import user2 from "../../assets/user2.jpg";
 import user3 from "../../assets/user3.jpg";
+import maskot from "../../assets/maskot.png";
 
 {/* Icons */}
 import seri2 from "../../assets/icons/seri2.json";
@@ -60,7 +61,7 @@ function LandingPage() {
           {/* Gambar */}
            <div className="flex-1 mt-20 lg:mt-0 flex justify-center">
             <img
-              src={picture1}
+              src={maskot}
               alt="Game Edukasi Quran"
               className="max-w-xs md:max-w-md drop-shadow-2xl"
             />
