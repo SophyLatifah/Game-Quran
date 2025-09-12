@@ -1,21 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import {React, useEffect, useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-function Dashboard() {
+export default function Dashboard() {
+
+  const Navigate = useNavigate();
+  const [Name, setName] = useState ("");
+
+  useEffect(() => {
+    // mengambil username dari localstorage
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && currentUser.name) {
+      setName(currentUser.name);
+    }
+  }, []);
+
+
   return (
-    <div className="min-h-screen bg-gray-100 font-sans">
-      {/* Header */}
-      <header className="bg-[#4B0E86] text-white p-4 flex justify-between items-center">
-        <h1 className="text-lg font-extrabold">DEEN QUIZ</h1>
 
-        <Link
-          to="/"
-          className="bg-[#FF9102] px-5 py-2 rounded-full text-sm font-bold text-center"
-        >
-        Logout
-        </Link>
-      
-      </header>
+    <div className="min-h-screen bg-gray-100 font-sans">
+     
+      {/* Cards sapaan */}
+      <section>
+        <div className="bg-[#5707A4]">
+        <h2 className="text-white font-bold px-5 py-3">Hai, {Name}</h2>
+        <p className="text-white px-5 py-3">Siap memulai pembelajaran sambil bermain hari ini?</p>
+        </div>
+      </section>
 
       {/* Progress Belajar */}
       <section className="p-4">
@@ -80,4 +90,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+

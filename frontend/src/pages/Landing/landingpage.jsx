@@ -56,6 +56,7 @@ function LandingPage() {
       {/* 1 */}
       <section className="bg-[#5707A4] min-h-scree flex items-center">
         <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center">
+
           {/* Gambar */}
            <div className="flex-1 mt-20 lg:mt-0 flex justify-center">
             <img
@@ -72,7 +73,7 @@ function LandingPage() {
             <ul className="mt-6 space-y-3 text-gray-200">
               <li>✅ Belajar sambil bermain</li>
               <li>✅ Konten islami yang terpercaya</li>
-              <li>✅ Mudah diakses di perangkat apa pu</li>
+              <li>✅ Mudah diakses di perangkat apa pun</li>
               <li>✅ Cocok untuk anak-anak dan dewasa</li>
             </ul>
           </div>

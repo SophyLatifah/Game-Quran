@@ -8,13 +8,31 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // nanti disambungkan ke backend (API login)
-    console.log("Email:", email);
-    console.log("Password:", password);
 
-    if (email && password) {
-        navigate("/dashboard");
+    // Ambil semua user yang sudah signup
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Cari user yang cocok
+    const user = users.find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (user) {
+      // Simpan user yang sedang login
+      localStorage.setItem("currentUser", JSON.stringify(user));
+
+      navigate("/dashboard");
+    } else {
+      alert("Email atau password salah!");
     }
+
+    // // nanti disambungkan ke backend (API login)
+    // console.log("Email:", email);
+    // console.log("Password:", password);
+
+    // if (email && password) {
+    //     navigate("/dashboard");
+    // }
   };
 
   return (

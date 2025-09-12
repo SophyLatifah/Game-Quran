@@ -19,6 +19,7 @@ import Signup from "./pages/auth/signup";
 
 // // import komponen
 import Navbar from "./component/navbar";
+import GameNav from "./component/gamenav.jsx";
 
 function App () {
   return (
@@ -41,8 +42,20 @@ function App () {
         />
 
         {/* USER */}
-        <Route path="/dashboard" element={<UserDashboard/>} />
-        <Route path="/hijaiyah" element={<Hijaiyah/>} />
+        <Route path="/dashboard" element={
+          <>
+          <GameNav /> 
+          <UserDashboard />
+          </>
+        } 
+          />
+        <Route path="/hijaiyah" element={
+          <>
+          <GameNav /> 
+          <Hijaiyah/>
+          </>
+          } 
+          />
 
         {/* ADMIN */}
           

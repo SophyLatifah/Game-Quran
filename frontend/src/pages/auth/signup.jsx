@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,10 +17,28 @@ function Signup() {
       return;
     }
 
-    // nanti ini disambungkan ke backend (API register)
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Password:", password);
+    // // nanti ini disambungkan ke backend (API register)
+    // console.log("Name:", name);
+    // console.log("Email:", email);
+    // console.log("Password:", password);
+
+    // ambil data user yang ada
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // cek kalau email udah dipake
+    const userExits = users.find((u) => u.email === email);
+    if (userExits) {
+      alert("Email sudah terdaftar, silakan login");
+      return;
+    }
+
+    // menyimpan user baru
+    const newUser = { name, email, password };
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Registrasi berhasil, silakan login!");
+    navigate("/login");
   };
 
   return (
