@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-
 function Signup() {
-
   const stars = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      delay: Math.random() * 3,
-    }));
+    id: i,
+    top: Math.random() * 100,
+    left: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    delay: Math.random() * 3,
+  }));
 
   const navigate = useNavigate();
 
@@ -28,24 +26,15 @@ function Signup() {
       return;
     }
 
-    // // nanti ini disambungkan ke backend (API register)
-    // console.log("Name:", name);
-    // console.log("Email:", email);
-    // console.log("Password:", password);
-
-    // ambil data user yang ada
     const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    // cek kalau email udah dipake
-    const userExits = users.find((u) => u.email === email);
-    if (userExits) {
+    const userExists = users.find((u) => u.email === email);
+    if (userExists) {
       alert("Email sudah terdaftar, silakan login");
       return;
     }
 
-    // menyimpan user baru
-    const newUser = { name, email, password };
-    users.push(newUser);
+    const newUser  = { name, email, password };
+    users.push(newUser );
     localStorage.setItem("users", JSON.stringify(users));
 
     alert("Registrasi berhasil, silakan login!");
@@ -53,11 +42,10 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-[#1a103d] via-[#2e1a63] to-[#4b0e86] overflow-hidden px-6 ">
-
+    <div className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-[#1a103d] via-[#2e1a63] to-[#4b0e86] overflow-hidden px-6">
       {/* Bintang */}
-        {stars.map((star) => (
-         <motion.div
+      {stars.map((star) => (
+        <motion.div
           key={star.id}
           className="absolute bg-white rounded-full"
           style={{
@@ -72,97 +60,122 @@ function Signup() {
             repeat: Infinity,
             delay: star.delay,
           }}
-          />
-          ))} 
-      
-      
-            {/* Glow bulat */}
-              <div className="absolute top-20 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"></div>
-              <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+        />
+      ))}
 
-      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md mt-10">
-        
-     {/* Tombol X */}
-           <Link
-             to="/"
-             className="absolute right- text-black text-3xl font-bold hover:text-gray-600"
-           >
-               ✕
-           </Link>
+      {/* Glow bulat */}
+      <div className="absolute top-20 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl opacity-30"></div>
+      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
 
-        <h2 className="text-2xl font-bold text-center text-[#4B0E86]">Daftar Akun</h2>
-        <p className="text-gray-600 text-center mt-2">Buat akun untuk mulai belajar 📖</p>
+      {/* Card Signup */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl p-10 w-full max-w-md mt-16 text-white"
+      >
+        {/* Tombol Close */}
+        <Link
+          to="/"
+          className="absolute top-6 right-6 text-white text-3xl font-bold hover:text-gray-300 transition"
+          aria-label="Close"
+        >
+          &times;
+        </Link>
 
-        <form onSubmit={handleSubmit} className="mt-6">
+        <h2 className="text-3xl font-extrabold text-center text-[#FF9102] mb-2">
+          Daftar Akun
+        </h2>
+        <p className="text-gray-300 text-center mb-8">
+          Buat akun untuk mulai belajar 📖
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Nama */}
           <div>
-            <label className="block text-gray-700">Nama</label>
+            <label htmlFor="name" className="block text-gray-200 font-semibold mb-1">
+              Nama
+            </label>
             <input
+              id="name"
               type="text"
               placeholder="Masukkan nama lengkap"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF9102]"
+              className="w-full p-3 rounded-lg border border-transparent bg-white/20 placeholder-gray-300 text-white focus:outline-none focus:ring-2 focus:ring-[#FF9102] focus:border-transparent transition"
               required
+              autoComplete="name"
             />
           </div>
 
           {/* Email */}
-          <div className="mt-4">
-            <label className="block text-gray-700">Email</label>
+          <div>
+            <label htmlFor="email" className="block text-gray-200 font-semibold mb-1">
+              Email
+            </label>
             <input
+              id="email"
               type="email"
               placeholder="Masukkan email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF9102]"
+              className="w-full p-3 rounded-lg border border-transparent bg-white/20 placeholder-gray-300 text-white focus:outline-none focus:ring-2 focus:ring-[#FF9102] focus:border-transparent transition"
               required
+              autoComplete="email"
             />
           </div>
 
           {/* Password */}
-          <div className="mt-4">
-            <label className="block text-gray-700">Password</label>
+          <div>
+            <label htmlFor="password" className="block text-gray-200 font-semibold mb-1">
+              Password
+            </label>
             <input
+              id="password"
               type="password"
               placeholder="Masukkan password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF9102]"
+              className="w-full p-3 rounded-lg border border-transparent bg-white/20 placeholder-gray-300 text-white focus:outline-none focus:ring-2 focus:ring-[#FF9102] focus:border-transparent transition"
               required
+              autoComplete="new-password"
             />
           </div>
 
           {/* Konfirmasi Password */}
-          <div className="mt-4">
-            <label className="block text-gray-700">Konfirmasi Password</label>
+          <div>
+            <label htmlFor="confirmPassword" className="block text-gray-200 font-semibold mb-1">
+              Konfirmasi Password
+            </label>
             <input
+              id="confirmPassword"
               type="password"
               placeholder="Ulangi password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full mt-2 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF9102]"
+              className="w-full p-3 rounded-lg border border-transparent bg-white/20 placeholder-gray-300 text-white focus:outline-none focus:ring-2 focus:ring-[#FF9102] focus:border-transparent transition"
               required
+              autoComplete="new-password"
             />
           </div>
 
           {/* Tombol Daftar */}
           <button
             type="submit"
-            className="w-full mt-6 bg-[#FF9102] hover:bg-amber-600 text-white py-3 rounded-lg font-semibold shadow-lg transition"
+            className="w-full py-3 bg-[#FF9102] hover:bg-amber-600 rounded-lg font-semibold shadow-lg transition-transform transform hover:scale-105"
           >
             Daftar
           </button>
         </form>
 
         {/* Link ke login */}
-        <p className="text-center text-gray-600">
+        <p className="text-center text-gray-300 mt-8">
           Sudah punya akun?{" "}
-          <Link to="/login" className="text-[#4B0E86] font-semibold hover:underline">
-            Login
+          <Link to="/login" className="text-white font-semibold hover:underline">
+            Masuk
           </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

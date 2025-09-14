@@ -12,7 +12,7 @@ function Navbar () {
                     <Link 
                         to="/login"
                         className="bg-[#FF9102] text-white px-4 py-2 font-semibold rounded-4xl text-center hover:bg-amber-600 transition-colors">
-                        Sign In
+                        Masuk
                     </Link>
                 </Button>
 
@@ -21,7 +21,7 @@ function Navbar () {
                         to="/signup"
                         className="bg-[#FF9102] text-white px-4 py-2 font-semibold rounded-4xl text-center hover:bg-amber-600 transition-colors"
                     >
-                        Sign Up
+                        Daftar
                     </Link>
                 </Button>
             </div>
