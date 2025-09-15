@@ -2,25 +2,25 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // // import halaman
 // -----LANDINGPAGE------ //
-import LandingPage from "./pages/Landing/landingpage.jsx"
+import LandingPage from "./pages/landingpage/landingpage"
 
 // // -----ADMIN----- //
-import AdminDashboard from "./pages/admin/dashboardadmin";
+// import AdminDashboard from "./pages/admin/dashboardadmin";
 // import ManageSoal from "./pages/admin/managesoal";
 
 // -----USER------ //
-import UserDashboard from "./pages/user/dashboard";
-import Hijaiyah from "./pages/user/hijaiyah";
-import Statistik from "./pages/user/statistik";
-import Game from "./pages/user/game";
+// import UserDashboard from "./pages/user/dashboard";
+// import Hijaiyah from "./pages/user/hijaiyah";
+// import Statistik from "./pages/user/statistik";
+// import Game from "./pages/user/game";
 
 // // -----AUTH----- //
-import Login from "./pages/auth/login";
-import Signup from "./pages/auth/signup";
+// import Login from "./pages/auth/login";
+// import Signup from "./pages/auth/signup";
 
 // // import komponen
-import Navbar from "./component/navbar";
-import GameNav from "./component/gamenav.jsx";
+import Navbar from "./component/navbar.jsx";
+
 
 function App () {
   return (
@@ -28,8 +28,7 @@ function App () {
       <Routes>
         {/* AUTH */}
         
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+    
         
           
 
@@ -38,44 +37,15 @@ function App () {
           <>
           <Navbar />
           <LandingPage />
-          </>
+          </> 
         }
         />
 
         {/* USER */}
-        <Route path="/dashboard" element={
-          <>
-          <GameNav /> 
-          <UserDashboard />
-          </>
-        } 
-          />
-        <Route path="/hijaiyah" element={
-          <>
-          <GameNav /> 
-          <Hijaiyah/>
-          </>
-          } 
-          />
-
-          <Route path="/statistik" element={
-          <>
-          <GameNav /> 
-          <Statistik /> 
-          </>
-          } 
-          />
-
-          <Route path="/game" element={
-          <>
-          <GameNav /> 
-          <Game /> 
-          </>
-          } 
-          />
+        
 
         {/* ADMIN */}
-        <Route path="/dashboardadmin" element={<AdminDashboard />} />
+        
       </Routes>
     </>
   );
