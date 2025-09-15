@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/userSlice.js";
+
 function Signup() {
   const stars = Array.from({ length: 50 }, (_, i) => ({
     id: i,
@@ -12,11 +15,13 @@ function Signup() {
   }));
 
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // untuk dispatch action ke redux
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("user"); // default role user
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,9 +38,13 @@ function Signup() {
       return;
     }
 
-    const newUser  = { name, email, password };
-    users.push(newUser );
-    localStorage.setItem("users", JSON.stringify(users));
+    const newUser  = { username: email, password, role };
+    // users.push(newUser );
+    // localStorage.setItem("users", JSON.stringify(users));
+
+    // Simpan user ke redux
+    dispatch(register(newUser));
+
 
     alert("Registrasi berhasil, silakan login!");
     navigate("/login");
@@ -158,6 +167,21 @@ function Signup() {
               autoComplete="new-password"
             />
           </div>
+
+        {/* Role */}
+        <div>
+          <label className="block text-gray-200 font-semibold mb-1">
+            Role
+          </label>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="w-full p-3 rounded-lg bg-white/20 text-white  "
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
 
           {/* Tombol Daftar */}
           <button

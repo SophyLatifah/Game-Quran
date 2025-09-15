@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/Landing/landingpage.jsx"
 
 // // -----ADMIN----- //
-// import AdminDashboard from "./pages/admin/dashboardadmin";
+import AdminDashboard from "./pages/admin/dashboardadmin";
 // import ManageSoal from "./pages/admin/managesoal";
 
 // -----USER------ //
@@ -75,7 +75,7 @@ function App () {
           />
 
         {/* ADMIN */}
-          
+        <Route path="/dashboardadmin" element={<AdminDashboard />} />
       </Routes>
     </>
   );

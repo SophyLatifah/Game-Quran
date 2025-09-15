@@ -1,6 +1,10 @@
-import { React, useState } from "react";
+import  React,{ useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+
+
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/userSlice.js";
 
 function Login() {
   const stars = Array.from({ length: 50 }, (_, i) => ({
@@ -15,20 +19,39 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  
+  const dispatch = useDispatch(); // untuk dispatch action ke redux
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    dispatch(login({ username: email, password }));
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (u) => u.email === email && u.password === password
-    );
+    
 
-    if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/dashboard");
+    if (currentUser && currentUser.username && currentUser.role) { if (currentUser) {
+      // kalau role admin -> redirect admin dashboard
+      if (currentUser.role === "admin") {
+        navigate("/dashboardadmin");
+      } else {
+        navigate("/dashboard");
+      }
     } else {
       alert("Email atau password salah!");
+    }    
     }
+    // const users = JSON.parse(localStorage.getItem("users")) || [];
+    // const user = users.find(
+    //   (u) => u.email === email && u.password === password
+    // );
+
+    // if (user) {
+    //   localStorage.setItem("currentUser", JSON.stringify(user));
+    //   navigate("/dashboard");
+    // } else {
+    //   alert("Email atau password salah!");
+    // }
   };
 
   return (

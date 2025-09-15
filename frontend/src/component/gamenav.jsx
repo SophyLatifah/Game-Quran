@@ -10,11 +10,11 @@ export default function GameNavbar() {
   // fungsi buat highlight menu aktif
   const getActiveClass = (path) =>
     location.pathname === path
-      ? "text-purple-700 font-bold"
-      : "text-gray-500";
+      ? "text-white font-bold"
+      : "text-gray-400";
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-white z-50">
+    <nav className="fixed bottom-0 left-0 w-full bg-[#1a103d] z-50">
       <div className="mx-auto flex justify-around py-3 relative">
         <Link
           to="/dashboard"

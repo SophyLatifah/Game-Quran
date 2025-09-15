@@ -125,13 +125,15 @@
 //   );
 // }
 
-import { React, useEffect, useState } from "react";
+import  React, {useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 export default function Dashboard() {
   const Navigate = useNavigate();
   const [Name, setName] = useState("");
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   // Animasi bintang
   const stars = Array.from({ length: 50 }, (_, i) => ({
@@ -146,7 +148,7 @@ export default function Dashboard() {
     // mengambil username dari localstorage
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser && currentUser.name) {
-      setName(currentUser.name);
+      setCurrentUser(currentUser.name);
     }
   }, []);
 
@@ -181,7 +183,7 @@ export default function Dashboard() {
         {/* Sapaan */}
         <section className="mb-12 max-w-3xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold tracking-wide">
-            Hai, <span className="text-[#FF9102]">{Name || "Teman"}</span>
+            Hai, <span className="text-[#FF9102]">{currentUser && currentUser.name || "Teman"}</span>
           </h2>
           <p className="mt-4 text-lg text-gray-300">
             Siap memulai pembelajaran sambil bermain hari ini?
@@ -258,7 +260,7 @@ export default function Dashboard() {
         <Link to="/quiz" className="text-white font-semibold hover:text-[#FF9102] transition">
           Kuis
         </Link>
-        <Link to="/profile" className="text-white font-semibold hover:text-[#FF9102] transition">
+        <Link to="/profile" className="text-white font-semibold hover:text-[rgb(255,145,2)] transition">
           Profile
         </Link>
       </nav>
