@@ -53,9 +53,13 @@ const Login = () => {
           />
 
           {/* Tombol Masuk */}
-          <button className="w-full bg-[#9b4d3d] text-gray-200 py-3 rounded-md font-semibold mb-4 hover:bg-[#b85e4f] transition">
+          <button 
+          onClick={() => navigate("/dashboard")}
+          className="w-full bg-[#9b4d3d] text-gray-200 py-3 rounded-md font-semibold mb-4 hover:bg-[#b85e4f] transition">
             MASUK
           </button>
+
+            
 
           {/* Link Lupa Sandi */}
           <p className="text-center text-blue-400 underline mb-6 cursor-pointer">
