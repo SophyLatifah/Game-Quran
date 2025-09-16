@@ -15,11 +15,14 @@ import LandingPage from "./pages/landingpage/landingpage"
 // import Game from "./pages/user/game";
 
 // // -----AUTH----- //
-// import Login from "./pages/auth/login";
-// import Signup from "./pages/auth/signup";
+ import Daftar from "./pages/auth/daftar.jsx";
+ import Daftar2 from "./pages/auth/daftar2.jsx";
+ import Daftar3 from "./pages/auth/daftar3.jsx";
+import Login from "./pages/auth/login.jsx";
 
 // // import komponen
 import Navbar from "./component/navbar.jsx";
+// import NavbarGame from "./component/navbarGame.jsx";
 
 
 function App () {
@@ -27,7 +30,10 @@ function App () {
     <>
       <Routes>
         {/* AUTH */}
-        
+        <Route path="/daftar" element={<Daftar />} />
+        <Route path="/daftar2" element={<Daftar2 />} />
+        <Route path="/daftar3" element={<Daftar3 />} />
+        <Route path="/login" element={<Login />} />
     
         
           
@@ -42,9 +48,14 @@ function App () {
         />
 
         {/* USER */}
-        
+        {/* <route path="/dashboard" element={
+          <>
+          <NavbarGame />
+          </>
 
-        {/* ADMIN */}
+        }
+          /> */}
+        
         
       </Routes>
     </>

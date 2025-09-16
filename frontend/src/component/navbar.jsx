@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
-
+import { Link } from "react-router-dom";
 import logo from '../assets/logo.png'; 
 
 const Navbar = () => {
@@ -11,21 +11,21 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center py-3">
          
-        {/* Logo */}
-        <div className="flex items-center space-x-2">
-        <img
-            src={logo}
-            alt="ThinkQuran Logo"
-            className="h-10 w-auto"
-        />
-        </div>
+          {/* Logo */}
+          <div className="flex items-center space-x-2">
+            <img
+              src={logo}
+              alt="ThinkQuran Logo"
+              className="h-10 w-auto"
+            />
+          </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-4">
             {/* Negara */}
             <button className="flex items-center border border-white/50 px-3 py-1 rounded-full text-white">
               <img
-                src="/assets/flag-id.png" // ganti dengan flag Indonesia
+                src="/assets/flag-id.png"
                 alt="Indonesia"
                 className="w-5 h-5 mr-2"
               />
@@ -54,20 +54,22 @@ const Navbar = () => {
             {/* Divider */}
             <div className="w-px h-6 bg-white/50"></div>
 
-            {/* Daftar */}
-            <button className="bg-orange-500 px-4 py-2 rounded-full text-white font-semibold hover:bg-orange-600 transition">
+            {/* Daftar → pakai Link biar routing jalan */}
+            <Link
+              to="/daftar"
+              className="bg-orange-500 px-4 py-2 rounded-full text-white font-semibold hover:bg-orange-600 transition"
+            >
               Daftar
-            </button>
-
+            </Link>
+            
             {/* Log masuk pakai image */}
-            <button className="flex items-center border border-white/50 px-4 py-2 rounded-full text-white hover:bg-purple-800 transition">
-              <img
-                src="/assets/login-icon.png" // ganti dengan gambar login
-                alt="Log Masuk"
-                className="w-5 h-5 mr-2"
-              />
-              Log masuk
-            </button>
+            <Link
+            to="/login"
+            className="flex items-center border border-white/50 px-4 py-2 rounded-full text-white hover:bg-purple-800 transition"
+            >
+            Log masuk
+            </Link>
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -99,9 +101,13 @@ const Navbar = () => {
               Indonesia
             </button>
 
-            <button className="bg-orange-500 px-4 py-2 rounded-full text-white font-semibold w-full hover:bg-orange-600 transition">
+            {/* Daftar (mobile) */}
+            <Link
+              to="/daftar"
+              className="bg-orange-500 px-4 py-2 rounded-full text-white font-semibold w-full hover:bg-orange-600 transition text-center block"
+            >
               Daftar
-            </button>
+            </Link>
 
             <button className="flex items-center border border-white/50 px-4 py-2 rounded-full text-white w-full justify-center hover:bg-purple-700 transition">
               <img src="/assets/login-icon.png" alt="Log Masuk" className="w-5 h-5 mr-2" />
