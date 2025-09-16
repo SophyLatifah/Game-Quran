@@ -10,10 +10,10 @@ import LandingPage from "./pages/landingpage/landingpage"
 
 // -----USER------ //
 import Dashboard from "./pages/user/dashboard.jsx";
-import Hafal from "./pages/user/hafal.jsx";
-import Liga from "./pages/user/liga.jsx";
-import Profil from "./pages/user/profil.jsx";
-import Plus from "./pages/user/plus.jsx";
+// import Hafal from "./pages/user/hafal.jsx";
+// import Liga from "./pages/user/liga.jsx";
+// import Profil from "./pages/user/profil.jsx";
+// import Plus from "./pages/user/plus.jsx";
 
 // // -----AUTH----- //
  import Daftar from "./pages/auth/daftar.jsx";
@@ -21,7 +21,11 @@ import Plus from "./pages/user/plus.jsx";
  import Daftar3 from "./pages/auth/daftar3.jsx";
 import Login from "./pages/auth/login.jsx";
 
-// // import komponen
+// GAME-QURAN
+import Game from "./pages/game/game.jsx";
+
+
+// import komponen
 import Navbar from "./component/navbar.jsx";
 import NavGame from "./component/navbarGame.jsx";
 
@@ -37,8 +41,6 @@ function App () {
         <Route path="/login" element={<Login />} />
     
         
-          
-
         {/* LANDINGPAGE */}
         <Route path="/" element= {
           <>
@@ -56,7 +58,7 @@ function App () {
           </>
           } />
         
-        <Route path="/hafal" element={
+        {/* <Route path="/hafal" element={
           <>
           <Hafal />
           <NavGame />
@@ -82,7 +84,13 @@ function App () {
           <Plus />
           <NavGame />
           </>
-          } />
+          } /> */}
+
+        {/* GAME */}
+        <Route path="/game/:surah" element={
+          <Game />
+        } />
+
       </Routes>
     </>
   );
