@@ -7,7 +7,7 @@ const Daftar2 = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center">
       {/* Mobile Container */}
       <div
         className="w-[375px] min-h-screen flex flex-col items-center justify-center px-6 relative text-center"

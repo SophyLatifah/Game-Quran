@@ -15,7 +15,7 @@ const Dashboard = () => {
   const navigate = useNavigate(); 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center ">
       {/* Mobile Container */}
       <div
         className="w-[375px] min-h-screen flex flex-col px-4 relative bg-[#30005A]"

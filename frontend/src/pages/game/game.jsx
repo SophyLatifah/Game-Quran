@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { generateQuiz } from "../../utils/generateQuestions";
-import dataSurah from "../../data/dataSurah";
+import dataSurah from "../../data/dataSurah"; 
 
 const Game = () => {
   const { surah } = useParams();
@@ -10,19 +10,16 @@ const Game = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLearningDone, setIsLearningDone] = useState(false);
 
-  const surahData = dataSurah[surah]; // misalnya "an-nas" atau "al-falaq"
+  const surahData = dataSurah[surah];
   const words = surahData?.words || [];
 
   useEffect(() => {
     if (words.length > 0) {
-      // mapping biar konsisten dengan yang lama (arabic, arti)
-      setVisibleWords([
-        { arabic: words[0].arab, arti: words[0].meaning },
-      ]);
+      setVisibleWords([{ arabic: words[0].arab, arti: words[0].meaning }]);
     }
     const quiz = generateQuiz(surah, 5);
     setQuestions(quiz);
-  }, [surah]);
+  }, [surah]); // biarkan sesuai kode aslinya
 
   const handleNext = () => {
     if (currentIndex < words.length - 1) {
@@ -48,19 +45,20 @@ const Game = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#30005A]">
-      <div className="w-[375px] min-h-screen flex flex-col px-4 py-6">
+    <div className="min-h-screen flex items-center justify-center">
+      {/* Mobile container */}
+      <div className="w-[375px] min-h-screen flex flex-col px-4 py-6 bg-[#30005A]">
         {!isLearningDone ? (
           <div className="flex flex-col items-center">
             <h1 className="text-xl font-bold text-orange-400 mb-6">
               Cobalah untuk mengingat
             </h1>
 
-            {/* list kata yang sudah muncul */}
+            {/* list kata */}
             {visibleWords.map((w, idx) => (
               <div
                 key={idx}
-                className="bg-purple-700 rounded-xl p-4 w-full mb-4 text-center relative"
+                className="bg-purple-700 rounded-xl p-4 w-full mb-4 text-center relative shadow-lg"
               >
                 <p className="text-3xl mb-2">{w.arabic}</p>
                 <p className="bg-purple-500 py-2 rounded text-lg">{w.arti}</p>
@@ -70,15 +68,13 @@ const Game = () => {
 
             <button
               onClick={handleNext}
-              className={`mt-4 w-full py-3 rounded-lg text-white text-lg font-semibold ${
+              className={`mt-4 w-full py-3 rounded-lg text-white text-lg font-semibold shadow-md ${
                 currentIndex < words.length - 1
                   ? "bg-sky-400"
                   : "bg-orange-500"
               }`}
             >
-              {currentIndex < words.length - 1
-                ? "BERIKUTNYA"
-                : "MULAI KUIS"}
+              {currentIndex < words.length - 1 ? "BERIKUTNYA" : "MULAI KUIS"}
             </button>
           </div>
         ) : (
@@ -87,7 +83,10 @@ const Game = () => {
               Kuis Surah {surahData.title}
             </h1>
             {questions.map((q) => (
-              <div key={q.id} className="mb-6 p-4 bg-purple-700 rounded-lg">
+              <div
+                key={q.id}
+                className="mb-6 p-4 bg-purple-700 rounded-lg shadow-md"
+              >
                 <p className="mb-2">{q.question}</p>
                 {q.type === "multiple-choice" && (
                   <ul>
@@ -117,7 +116,7 @@ const Game = () => {
 
                 {q.type === "match" && (
                   <div>
-                    <p>[Tampilan matching Arab ↔ arti nanti kita kembangkan]</p>
+                    <p>[Tampilan matching Arab ↔ arti nanti di kembangkan]</p>
                   </div>
                 )}
               </div>
