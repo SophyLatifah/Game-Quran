@@ -62,10 +62,16 @@ const Login = () => {
             className="w-full px-4 py-3 rounded-md bg-purple-700 text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 mb-6"
           />
 
-          {/* Tombol Lanjutkan */}
-          <button className="w-full bg-[#9b4d3d] text-white py-3 rounded-md font-semibold mb-6 hover:bg-[#b85e4f] transition">
-            BUAT AKUN
-          </button>
+        {/* Tombol Lanjutkan */}
+      <button
+        onClick={() => navigate("/dashboard")}
+        className="w-full bg-[#9b4d3d] text-white py-3 rounded-md font-semibold mb-6 hover:bg-[#b85e4f] transition"
+      >
+        BUAT AKUN
+      </button>
+      
+
+
 
           {/* Tombol Facebook */}
           <button className="w-full flex items-center justify-center bg-purple-700 text-white py-3 rounded-md mb-3 border border-orange-400 hover:bg-purple-800 transition">

@@ -9,7 +9,7 @@ import LandingPage from "./pages/landingpage/landingpage"
 // import ManageSoal from "./pages/admin/managesoal";
 
 // -----USER------ //
-// import UserDashboard from "./pages/user/dashboard";
+import Dashboard from "./pages/user/dashboard.jsx";
 // import Hijaiyah from "./pages/user/hijaiyah";
 // import Statistik from "./pages/user/statistik";
 // import Game from "./pages/user/game";
@@ -22,7 +22,7 @@ import Login from "./pages/auth/login.jsx";
 
 // // import komponen
 import Navbar from "./component/navbar.jsx";
-// import NavbarGame from "./component/navbarGame.jsx";
+import NavGame from "./component/navbarGame.jsx";
 
 
 function App () {
@@ -48,14 +48,12 @@ function App () {
         />
 
         {/* USER */}
-        {/* <route path="/dashboard" element={
+        <Route path="/dashboard" element={
           <>
-          <NavbarGame />
+          <Dashboard />
+          <NavGame />
           </>
-
-        }
-          /> */}
-        
+          } />
         
       </Routes>
     </>

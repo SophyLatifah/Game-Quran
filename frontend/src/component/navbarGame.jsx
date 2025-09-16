@@ -1,51 +1,64 @@
 import React from "react";
-import { FaHome, FaUser, FaWhatsapp } from "react-icons/fa";
-import { GiLaurelCrown } from "react-icons/gi";
-import { RiVipDiamondFill } from "react-icons/ri";
-import { IoMdBook } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+
+// Import icon dari assets
+import iconHafal from "../assets/navgame/hafal.png";
+import iconLiga from "../assets/navgame/liga.png";
+import iconBeranda from "../assets/navgame/beranda.png";
+import iconProfil from "../assets/navgame/profil.png";
+import iconPlus from "../assets/navgame/plus.png";
+
+// icon hover
+
 
 const NavbarGame = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-[#2d0052] border-t border-purple-500 z-50">
-      <div className="relative flex justify-between items-center px-4 py-2">
-        {/* Tombol WhatsApp */}
-        <div className="absolute -top-6 left-4">
-          <div className="bg-green-500 rounded-full p-3 shadow-lg">
-            <FaWhatsapp className="text-white text-xl" />
-          </div>
-        </div>
+    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[375px] bg-[#3a0073] flex justify-between px-6 py-3 shadow-lg z-50">
+      {/* Hafal */}
+      <div
+        className="flex flex-col items-center cursor-pointer"
+        onClick={() => navigate("/hafal")}
+      >
+        <img src={iconHafal} alt="Hafal" className="w-6 h-6 mb-1" />
+        <span className="text-white text-sm hover:text-orange-400 cursor-pointer">Hafal</span>
+      </div>
 
-        {/* Menu Hafal */}
-        <div className="flex flex-col items-center text-white flex-1">
-          <IoMdBook className="text-yellow-400 text-xl mb-1" />
-          <span className="text-sm">Hafal</span>
-        </div>
+      {/* Liga */}
+      <div
+        className="flex flex-col items-center cursor-pointer"
+        onClick={() => navigate("/liga")}
+      >
+        <img src={iconLiga} alt="Liga" className="w-6 h-6 mb-1" />
+        <span className="text-white text-sm hover:text-orange-400 cursor-pointer">Liga</span>
+      </div>
 
-        {/* Menu Liga */}
-        <div className="flex flex-col items-center text-white flex-1">
-          <GiLaurelCrown className="text-purple-400 text-xl mb-1" />
-          <span className="text-sm">Liga</span>
-        </div>
+      {/* Beranda */}
+      <div
+        className="flex flex-col items-center cursor-pointer"
+        onClick={() => navigate("/dashboard")}
+      >
+        <img src={iconBeranda} alt="Beranda" className="w-6 h-6 mb-1" />
+        <span className="text-white text-sm hover:text-orange-400 cursor-pointer">Beranda</span>
+      </div>
 
-        {/* Menu Beranda (Tengah / Aktif) */}
-        <div className="relative flex flex-col items-center text-white flex-1">
-          <div className="absolute -top-6 bg-[#2d0052] rounded-full border-4 border-[#fa8c00] p-3">
-            <FaHome className="text-black text-2xl" />
-          </div>
-          <div className="mt-6 text-orange-400 text-sm font-semibold">Beranda</div>
-        </div>
+      {/* Profil */}
+      <div
+        className="flex flex-col items-center cursor-pointer"
+        onClick={() => navigate("/profil")}
+      >
+        <img src={iconProfil} alt="Profil" className="w-6 h-6 mb-1" />
+        <span className="text-white text-sm hover:text-orange-400 cursor-pointer">Profil</span>
+      </div>
 
-        {/* Menu Profil */}
-        <div className="flex flex-col items-center text-white flex-1">
-          <FaUser className="text-purple-300 text-xl mb-1" />
-          <span className="text-sm">Profil</span>
-        </div>
-
-        {/* Menu PLUS */}
-        <div className="flex flex-col items-center text-white flex-1">
-          <RiVipDiamondFill className="text-purple-400 text-xl mb-1" />
-          <span className="text-sm">PLUS</span>
-        </div>
+      {/* PLUS */}
+      <div
+        className="flex flex-col items-center cursor-pointer"
+        onClick={() => navigate("/plus")}
+      >
+        <img src={iconPlus} alt="Plus" className="w-6 h-6 mb-1" />
+        <span className="text-white text-sm hover:text-orange-400 cursor-pointer">PLUS</span>
       </div>
     </div>
   );

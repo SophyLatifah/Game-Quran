@@ -10,7 +10,7 @@ const LandingPage = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-28 pb-20 bg-purple-900 text-white">
+      <section className="pt-28 pb-20 bg-purple-900 text-white mt-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center">
           {/* Kiri: Teks */}
           <div className="md:w-1/2 space-y-6">
