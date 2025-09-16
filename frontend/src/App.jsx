@@ -10,9 +10,10 @@ import LandingPage from "./pages/landingpage/landingpage"
 
 // -----USER------ //
 import Dashboard from "./pages/user/dashboard.jsx";
-// import Hijaiyah from "./pages/user/hijaiyah";
-// import Statistik from "./pages/user/statistik";
-// import Game from "./pages/user/game";
+import Hafal from "./pages/user/hafal.jsx";
+import Liga from "./pages/user/liga.jsx";
+import Profil from "./pages/user/profil.jsx";
+import Plus from "./pages/user/plus.jsx";
 
 // // -----AUTH----- //
  import Daftar from "./pages/auth/daftar.jsx";
@@ -55,6 +56,33 @@ function App () {
           </>
           } />
         
+        <Route path="/hafal" element={
+          <>
+          <Hafal />
+          <NavGame />
+          </>
+          } />
+        
+        <Route path="/liga" element={
+          <>
+          <Liga />
+          <NavGame />
+          </>
+          } />
+        
+        <Route path="/profil" element={
+          <>
+          <Profil />
+          <NavGame />
+          </>
+          } />
+
+        <Route path="/plus" element={
+          <>
+          <Plus />
+          <NavGame />
+          </>
+          } />
       </Routes>
     </>
   );
