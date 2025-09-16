@@ -1,23 +1,47 @@
 import { useParams } from "react-router-dom";
-import dataSurah from "../../data/dataSurah";
+import { useState, useEffect } from "react";
+import { generateQuiz } from "../../utils/generateQuestions";
 
 const Game = () => {
-  const { surah } = useParams(); // contoh: /game/an-nas
-  const surahData = dataSurah[surah];
+  const { surah } = useParams();
+  const [questions, setQuestions] = useState([]);
 
-  if (!surahData) {
-    return <div className="text-white text-center mt-10">Surah tidak ditemukan.</div>;
-  }
+  useEffect(() => {
+    const quiz = generateQuiz(surah, 5); // generate 5 soal
+    setQuestions(quiz);
+  }, [surah]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-purple-900 text-white p-6">
-      <h1 className="text-2xl font-bold mb-4">{surahData.title}</h1>
-      <p className="mb-6">XP: {surahData.xp}</p>
+    <div className="p-6 text-white">
+      <h1 className="text-2xl font-bold mb-4">Kuis Surah {surah}</h1>
+      {questions.map(q => (
+        <div key={q.id} className="mb-6 p-4 bg-purple-700 rounded-lg">
+          <p className="mb-2">{q.question}</p>
+          {q.type === "multiple-choice" && (
+            <ul>
+              {q.options.map((opt, i) => (
+                <li key={i} className="hover:bg-purple-500 cursor-pointer p-2 rounded">
+                  {opt}
+                </li>
+              ))}
+            </ul>
+          )}
 
-      {/* Contoh render soal */}
-      {surahData.questions.map((q, i) => (
-        <div key={i} className="mb-4 p-4 bg-purple-700 rounded-lg shadow">
-          <p>{q.question}</p>
+          {q.type === "underline" && (
+            <ul>
+              {q.options.map((opt, i) => (
+                <li key={i} className="hover:bg-purple-500 cursor-pointer p-2 rounded">
+                  {opt}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {q.type === "match" && (
+            <div>
+              <p>[Tampilan matching Arab ↔ arti nanti kita kembangkan]</p>
+            </div>
+          )}
         </div>
       ))}
     </div>
