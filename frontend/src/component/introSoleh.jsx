@@ -10,7 +10,7 @@ const IntroSoleh = ({ onMulai }) => {
         {/* Card ucapan */}
         <div className="bg-purple-800/90 p-4 rounded-2xl w-full text-center text-white mb-6 border-2 border-purple-400 shadow-lg">
           <p className="text-base sm:text-lg leading-relaxed">
-            Salam Syakira, <br />
+            Salam Teman, <br />
             Aku <span className="font-bold">Soleh</span> — teman belajarmu! <br />
             Yuk belajar seru dan jadi lebih bijak, <br />
             satu kata setiap kali 🚀

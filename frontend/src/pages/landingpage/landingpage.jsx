@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 {/* import gambar */}
 import heroImage from "../../assets/hero_image.png"; 
@@ -7,6 +8,8 @@ import phonesImage from "../../assets/hp.png"; // gambar HP
 import bgPattern from "../../assets/bg1.png"; // background pattern
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Hero Section */}
@@ -30,7 +33,9 @@ const LandingPage = () => {
               </li>
             </ul>
 
-            <button className="bg-orange-500 hover:bg-orange-600 transition px-6 py-3 rounded-xl font-semibold text-lg shadow-md">
+            <button 
+            onClick={() => navigate("/daftar2")}
+            className="bg-orange-500 hover:bg-orange-600 transition px-6 py-3 rounded-xl font-semibold text-lg shadow-md">
               Mulai belajar
             </button>
           </div>
@@ -99,7 +104,9 @@ const LandingPage = () => {
         </h2>
 
         {/* Tombol */}
-        <button className="mt-8 bg-orange-500 hover:bg-orange-600 transition px-8 py-4 rounded-xl font-semibold text-lg shadow-md">
+        <button 
+        onClick={() => navigate("/daftar2")}
+        className="mt-8 bg-orange-500 hover:bg-orange-600 transition px-8 py-4 rounded-xl font-semibold text-lg shadow-md">
           Mulai belajar
         </button>
       </section>
