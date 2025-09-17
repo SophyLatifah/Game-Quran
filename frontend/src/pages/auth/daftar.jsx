@@ -5,11 +5,11 @@ import { FcGoogle } from "react-icons/fc";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center ">
+    <div className="min-h-screen flex items-center justify-center">
       {/* Mobile Container */}
       <div
         className="w-[375px] min-h-screen flex items-center justify-center px-4 relative"
@@ -29,42 +29,32 @@ const Login = () => {
             <IoClose />
           </button>
 
+          {/* Link kode diskon */}
+          <p className="text-purple-300 text-center underline mb-6 cursor-pointer">
+            Saya memiliki kode diskon
+          </p>
+
           {/* Judul */}
-          <h1 className="text-orange-400 text-2xl font-bold mb-6 text-center">
-            Masukkan perincian (detail) anda
+          <h1 className="text-orange-400 text-3xl font-bold mb-6 text-center">
+            Buat akun
           </h1>
 
-          {/* Input Email */}
-          <label className="block text-white mb-2">
-            Alamat email / nomor telepon
-          </label>
+          {/* Input */}
+          <label className="block text-white mb-2">Siapa nama anda?</label>
           <input
             type="text"
-            placeholder=""
+            placeholder="Masukkan nama..."
             className="w-full px-4 py-3 rounded-md bg-purple-700 text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 mb-4"
           />
 
-          {/* Input Password */}
-          <label className="block text-white mb-2">Kata sandi</label>
-          <input
-            type="password"
-            placeholder=""
-            className="w-full px-4 py-3 rounded-md bg-purple-700 text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-400 mb-2"
-          />
+         {/* Tombol Lanjutkan */}
+        <button
+        onClick={() => navigate("/daftar3")}
+        className="w-full bg-[#9b4d3d] text-gray-200 py-3 rounded-md font-semibold mb-6 hover:bg-[#b85e4f] transition"
+        >
+        LANJUTKAN
+        </button>
 
-          {/* Tombol Masuk */}
-          <button 
-          onClick={() => navigate("/dashboard")}
-          className="w-full bg-[#9b4d3d] text-gray-200 py-3 rounded-md font-semibold mb-4 hover:bg-[#b85e4f] transition">
-            MASUK
-          </button>
-
-            
-
-          {/* Link Lupa Sandi */}
-          <p className="text-center text-blue-400 underline mb-6 cursor-pointer">
-            LUPA KATA SANDI
-          </p>
 
           {/* Tombol Facebook */}
           <button className="w-full flex items-center justify-center bg-purple-700 text-white py-3 rounded-md mb-3 border border-orange-400 hover:bg-purple-800 transition">
@@ -81,4 +71,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

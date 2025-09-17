@@ -2,80 +2,95 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // // import halaman
 // -----LANDINGPAGE------ //
-import LandingPage from "./pages/Landing/landingpage.jsx"
+import LandingPage from "./pages/landingpage/landingpage"
 
 // // -----ADMIN----- //
-import AdminDashboard from "./pages/admin/dashboardadmin";
+// import AdminDashboard from "./pages/admin/dashboardadmin";
 // import ManageSoal from "./pages/admin/managesoal";
 
 // -----USER------ //
-import UserDashboard from "./pages/user/dashboard";
-import Hijaiyah from "./pages/user/hijaiyah";
-import Statistik from "./pages/user/statistik";
-import Game from "./pages/user/game";
+import Dashboard from "./pages/user/dashboard.jsx";
+// import Hafal from "./pages/user/hafal.jsx";
+// import Liga from "./pages/user/liga.jsx";
+// import Profil from "./pages/user/profil.jsx";
+// import Plus from "./pages/user/plus.jsx";
 
 // // -----AUTH----- //
-import Login from "./pages/auth/login";
-import Signup from "./pages/auth/signup";
+ import Daftar from "./pages/auth/daftar.jsx";
+ import Daftar2 from "./pages/auth/daftar2.jsx";
+ import Daftar3 from "./pages/auth/daftar3.jsx";
+import Login from "./pages/auth/login.jsx";
 
-// // import komponen
-import Navbar from "./component/navbar";
-import GameNav from "./component/gamenav.jsx";
+// GAME-QURAN
+import Game from "./pages/game/game.jsx";
+
+
+// import komponen
+import Navbar from "./component/navbar.jsx";
+import NavGame from "./component/navbarGame.jsx";
+
 
 function App () {
   return (
     <>
       <Routes>
         {/* AUTH */}
-        
+        <Route path="/daftar" element={<Daftar />} />
+        <Route path="/daftar2" element={<Daftar2 />} />
+        <Route path="/daftar3" element={<Daftar3 />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+    
         
-          
-
         {/* LANDINGPAGE */}
         <Route path="/" element= {
           <>
           <Navbar />
           <LandingPage />
-          </>
+          </> 
         }
         />
 
         {/* USER */}
         <Route path="/dashboard" element={
           <>
-          <GameNav /> 
-          <UserDashboard />
+          <Dashboard />
+          <NavGame />
           </>
-        } 
-          />
-        <Route path="/hijaiyah" element={
+          } />
+        
+        {/* <Route path="/hafal" element={
           <>
-          <GameNav /> 
-          <Hijaiyah/>
+          <Hafal />
+          <NavGame />
           </>
-          } 
-          />
-
-          <Route path="/statistik" element={
+          } />
+        
+        <Route path="/liga" element={
           <>
-          <GameNav /> 
-          <Statistik /> 
+          <Liga />
+          <NavGame />
           </>
-          } 
-          />
-
-          <Route path="/game" element={
+          } />
+        
+        <Route path="/profil" element={
           <>
-          <GameNav /> 
-          <Game /> 
+          <Profil />
+          <NavGame />
           </>
-          } 
-          />
+          } />
 
-        {/* ADMIN */}
-        <Route path="/dashboardadmin" element={<AdminDashboard />} />
+        <Route path="/plus" element={
+          <>
+          <Plus />
+          <NavGame />
+          </>
+          } /> */}
+
+        {/* GAME */}
+        <Route path="/game/:surah" element={
+          <Game />
+        } />
+
       </Routes>
     </>
   );
