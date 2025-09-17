@@ -29,7 +29,7 @@ const Dashboard = () => {
         <div className="flex flex-col items-center mt-10">
           <div
             className="relative bg-orange-500 rounded-full p-6 w-28 h-28 flex items-center justify-center shadow-lg cursor-pointer"
-            onClick={() => setShowMateri(true)} // ✅ buka popup materi dulu
+            onClick={() => setShowMateri(true)} // buka popup materi dulu
           >
             <span className="text-white text-4xl">👳‍♂️</span>
             <div className="absolute -top-5 bg-blue-500 text-white text-sm px-3 py-1 rounded-full shadow">

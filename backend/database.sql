@@ -8,8 +8,8 @@ USE game_quran;
 CREATE TABLE peserta (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nama VARCHAR(100) NOT NULL,
-  email VARCHAR(100) UNIQUE,
-  skor INT DEFAULT 0
+  phone VARCHAR(20) UNIQUE,
+  password VARCHAR(255)
 );
 
 -- 4. Bikin tabel admin
