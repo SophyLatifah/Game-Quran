@@ -19,7 +19,7 @@ const Game = () => {
     }
     const quiz = generateQuiz(surah, 5);
     setQuestions(quiz);
-  }, [surah]); // biarkan sesuai kode aslinya
+  }, [surah]);
 
   const handleNext = () => {
     if (currentIndex < words.length - 1) {
