@@ -5,7 +5,7 @@ import db from "./db.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
+import userRoutes from "./routes/userRoutes";
 
 dotenv.config();
 

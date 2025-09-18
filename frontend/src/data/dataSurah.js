@@ -6,42 +6,74 @@ const dataSurah = {
       {
         ayat: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ",
         arab: "قُلْ",
-        meaning: "katakanlah"
+        meaning: "katakanlah",
+        audio: "https://audio.qurancdn.com/wbw/114_001_001.mp3"
+      },
+      {
+        ayat: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ",
+        arab: "أَعُوذُ",
+        meaning: "aku berlindung",
+        audio:"https://audio.qurancdn.com/wbw/114_001_002.mp3"
+      },
+      {
+        ayat: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ",
+        arab: "بِرَبِّ",
+        meaning: "dengan Tuhan",
+        audio:"https://audio.qurancdn.com/wbw/114_001_003.mp3"
       },
       {
         ayat: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ",
         arab: "النَّاسِ",
-        meaning: "manusia"
+        meaning: "manusia",
+        audio:"https://audio.qurancdn.com/wbw/114_001_004.mp3"
       },
       {
         ayat: "مَلِكِ النَّاسِ",
         arab: "مَلِكِ",
-        meaning: "raja"
+        meaning: "raja",
+        audio: "https://audio.qurancdn.com/wbw/114_002_001.mp3"
       },
       {
         ayat: "إِلَٰهِ النَّاسِ",
         arab: "إِلَٰهِ",
-        meaning: "sesembahan"
+        meaning: "sesembahan",
+        audio: "https://audio.qurancdn.com/wbw/114_003_001.mp3"
+      },
+      {
+        ayat: "مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
+        arab: "مِن",
+        meaning: "dari",
+        audio: "https://audio.qurancdn.com/wbw/114_004_001.mp3"
       },
       {
         ayat: "مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
         arab: "شَرِّ",
-        meaning: "kejahatan"
+        meaning: "kejahatan",
+        audio: "https://audio.qurancdn.com/wbw/114_004_002.mp3"
+      },
+      {
+        ayat: "مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
+        arab: "الْوَسْوَاسِ",
+        meaning: "bisikan",
+        audio: "https://audio.qurancdn.com/wbw/114_004_003.mp3"
       },
       {
         ayat: "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ",
         arab: "صُدُورِ",
-        meaning: "dada"
+        meaning: "dada",
+        audio: "https://audio.qurancdn.com/wbw/114_005_004.mp3"
       },
       {
         ayat: "مِنَ الْجِنَّةِ وَالنَّاسِ",
         arab: "الْجِنَّةِ",
-        meaning: "jin"
+        meaning: "jin",
+        audio: "https://audio.qurancdn.com/wbw/114_006_002.mp3"
       },
       {
         ayat: "مِنَ الْجِنَّةِ وَالنَّاسِ",
-        arab: "وَ",
-        meaning: "dan"
+        arab: "وَالنَّاسِ",
+        meaning: "dan manusia",
+        audio: "https://audio.qurancdn.com/wbw/114_006_003.mp3"
       }
     ]
   },
@@ -53,32 +85,38 @@ const dataSurah = {
       {
         ayat: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ",
         arab: "قُلْ",
-        meaning: "katakanlah"
+        meaning: "katakanlah",
+        audio: "https://audio.qurancdn.com/wbw/113_001_001.mp3"
       },
       {
         ayat: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ",
         arab: "الْفَلَقِ",
-        meaning: "waktu subuh"
+        meaning: "waktu subuh",
+        audio: "https://audio.qurancdn.com/wbw/113_001_004.mp3"
       },
       {
         ayat: "مِن شَرِّ مَا خَلَقَ",
         arab: "خَلَقَ",
-        meaning: "yang Dia ciptakan"
+        meaning: "yang Dia ciptakan",
+        audio: "https://audio.qurancdn.com/wbw/113_002_004.mp3"
       },
       {
         ayat: "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
         arab: "غَاسِقٍ",
-        meaning: "kegelapan"
+        meaning: "kegelapan",
+        audio: "https://audio.qurancdn.com/wbw/113_003_002.mp3"
       },
       {
         ayat: "وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ",
         arab: "النَّفَّاثَاتِ",
-        meaning: "peniup"
+        meaning: "peniup",
+        audio: "https://audio.qurancdn.com/wbw/113_004_002.mp3"
       },
       {
         ayat: "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
         arab: "حَاسِدٍ",
-        meaning: "pendengki"
+        meaning: "pendengki",
+        audio: "https://audio.qurancdn.com/wbw/113_005_003.mp3"
       }
     ]
   }

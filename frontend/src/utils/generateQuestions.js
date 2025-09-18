@@ -52,9 +52,19 @@ export function generateMultipleChoiceQuestion(surahData, id) {
  * @returns {Object} Objek soal mencocokkan kata
  */
 export function generateMatchQuestion(surahData, id) {
+  // Gunakan id sebagai seed untuk memastikan soal berbeda
+  const seed = id * 1000;
+  
+  // Ambil kata-kata dari surah dan acak dengan seed
+  const shuffledWords = [...surahData.words].sort(() => {
+    // Gunakan seed untuk menghasilkan pengacakan yang konsisten per id
+    const random = Math.sin(seed + Math.random()) * 10000;
+    return random - Math.floor(random);
+  });
+  
   // Ambil 4 kata acak dari surah (atau kurang jika tidak cukup)
   const pairCount = Math.min(4, surahData.words.length);
-  const pairs = shuffle([...surahData.words]).slice(0, pairCount);
+  const pairs = shuffledWords.slice(0, pairCount);
   
   return {
     id,
@@ -63,7 +73,8 @@ export function generateMatchQuestion(surahData, id) {
     pairs: pairs.map(word => ({
       arab: word.arab,
       meaning: word.meaning,
-      ayat: word.ayat
+      ayat: word.ayat,
+      audio: word.audio // Tambahkan audio ke setiap pasangan
     }))
   };
 }
@@ -74,7 +85,7 @@ export function generateMatchQuestion(surahData, id) {
  * @param {Number} jumlahSoal - Jumlah soal yang diinginkan
  * @returns {Array} Array berisi soal-soal kuis
  */
-export function generateQuiz(surah, jumlahSoal = 10) {
+export function generateQuiz(surah, jumlahSoal = 5) {
   const surahData = dataSurah[surah];
   if (!surahData) return [];
 
@@ -112,8 +123,12 @@ export function generateMatchQuiz(surah, jumlahSoal = 5) {
   const surahData = dataSurah[surah];
   if (!surahData) return [];
 
+  // Pastikan jumlah soal tidak melebihi jumlah kata yang tersedia
+  const maxQuestions = Math.min(jumlahSoal, Math.floor(surahData.words.length / 4));
+  const actualQuestionCount = Math.max(1, maxQuestions);
+  
   let questions = [];
-  for (let i = 0; i < jumlahSoal; i++) {
+  for (let i = 0; i < actualQuestionCount; i++) {
     questions.push(generateMatchQuestion(surahData, i + 1));
   }
   

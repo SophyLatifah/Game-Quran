@@ -36,3 +36,25 @@ CREATE TABLE jawaban (
   FOREIGN KEY (peserta_id) REFERENCES peserta(id),
   FOREIGN KEY (soal_id) REFERENCES soal(id)
 );
+
+-- Tabel untuk menyimpan kata-kata yang dihafal
+CREATE TABLE IF NOT EXISTS memorized_words (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  surah_id INTEGER NOT NULL,
+  arab TEXT NOT NULL,
+  meaning TEXT NOT NULL,
+  audio TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabel untuk menyimpan skor
+CREATE TABLE IF NOT EXISTS scores (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  surah_id INTEGER NOT NULL,
+  score INTEGER NOT NULL DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(user_id, surah_id)
+);

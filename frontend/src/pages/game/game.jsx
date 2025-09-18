@@ -1,12 +1,58 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { generateQuiz } from "../../utils/generateQuestions";
 import dataSurah from "../../data/dataSurah"; 
+
+// Komponen untuk tombol audio
+const AudioButton = ({ audioSrc }) => {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  useEffect(() => {
+    const handleEnded = () => setIsPlaying(false);
+    
+    if (audioRef.current) {
+      audioRef.current.addEventListener('ended', handleEnded);
+    }
+    
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener('ended', handleEnded);
+      }
+    };
+  }, []);
+
+  return (
+    <>
+      <audio ref={audioRef} src={audioSrc} />
+      <button 
+        onClick={playAudio} 
+        className={`w-10 h-10 rounded-full flex items-center justify-center ${isPlaying ? 'bg-orange-500' : 'bg-purple-500'}`}
+      >
+        {isPlaying ? '■' : '▶'}
+      </button>
+    </>
+  );
+};
 
 // Komponen untuk menampilkan soal pilihan ganda
 const MultipleChoiceQuestion = ({ question, onAnswer }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const correctAudioRef = useRef(null);
+  const wrongAudioRef = useRef(null);
 
   const handleOptionClick = (option) => {
     if (isAnswered) return;
@@ -14,15 +60,27 @@ const MultipleChoiceQuestion = ({ question, onAnswer }) => {
     setSelectedOption(option);
     setIsAnswered(true);
     
+    // Putar efek suara berdasarkan jawaban
+    const isCorrect = option === question.correct;
+    if (isCorrect) {
+      correctAudioRef.current?.play();
+    } else {
+      wrongAudioRef.current?.play();
+    }
+    
     // Beri waktu untuk animasi sebelum pindah ke soal berikutnya
     setTimeout(() => {
-      onAnswer(option === question.correct);
-    }, 1000);
+      onAnswer(isCorrect);
+    }, 1500);
   };
 
   return (
     <div className="mb-6 p-4 bg-purple-700 rounded-lg shadow-md">
-      <p className="mb-4 text-white font-semibold">{question.question}</p>
+      <div className="flex justify-between items-center mb-4">
+        <p className="text-white font-semibold">{question.question}</p>
+        {question.audio && <AudioButton audioSrc={question.audio} />}
+      </div>
+      
       <ul className="space-y-2">
         {question.options.map((opt, i) => (
           <li
@@ -42,6 +100,10 @@ const MultipleChoiceQuestion = ({ question, onAnswer }) => {
           </li>
         ))}
       </ul>
+      
+      {/* Audio efek untuk jawaban */}
+      <audio ref={correctAudioRef} src="/sounds/correct.mp3" />
+      <audio ref={wrongAudioRef} src="/sounds/wrong.mp3" />
     </div>
   );
 };
@@ -52,23 +114,47 @@ const MatchQuestion = ({ question, onAnswer }) => {
   const [matchedPairs, setMatchedPairs] = useState([]);
   const [shuffledArabs, setShuffledArabs] = useState([]);
   const [shuffledMeanings, setShuffledMeanings] = useState([]);
+  
+  // Referensi untuk efek suara
+  const correctSoundRef = useRef(null);
 
   useEffect(() => {
     // Acak urutan kata Arab dan artinya
-    setShuffledArabs([...question.pairs].map(p => p.arab));
-    setShuffledMeanings([...question.pairs].map(p => p.meaning).sort(() => Math.random() - 0.5));
+    const arabItems = [...question.pairs].map(p => ({
+      arab: p.arab,
+      audio: p.audio
+    }));
+    
+    const meaningItems = [...question.pairs].map(p => p.meaning);
+    
+    setShuffledArabs(shuffle([...arabItems]));
+    setShuffledMeanings(shuffle([...meaningItems]));
     setMatchedPairs([]);
     setSelectedPair({ arab: null, meaning: null });
   }, [question]);
 
-  const handleArabClick = (arab) => {
+  const handleArabClick = (arab, audio) => {
+    // Jika sudah dicocokkan, abaikan klik
     if (matchedPairs.find(p => p.arab === arab)) return;
-    setSelectedPair(prev => ({ ...prev, arab }));
+    
+    // Jika sudah ada pilihan arab sebelumnya, reset
+    if (selectedPair.arab) {
+      setSelectedPair({ arab, audio, meaning: selectedPair.meaning });
+    } else {
+      setSelectedPair({ ...selectedPair, arab, audio });
+    }
   };
 
   const handleMeaningClick = (meaning) => {
+    // Jika sudah dicocokkan, abaikan klik
     if (matchedPairs.find(p => p.meaning === meaning)) return;
-    setSelectedPair(prev => ({ ...prev, meaning }));
+    
+    // Jika sudah ada pilihan meaning sebelumnya, reset
+    if (selectedPair.meaning) {
+      setSelectedPair({ ...selectedPair, meaning });
+    } else {
+      setSelectedPair({ ...selectedPair, meaning });
+    }
   };
 
   useEffect(() => {
@@ -80,23 +166,41 @@ const MatchQuestion = ({ question, onAnswer }) => {
       );
 
       if (isCorrect) {
+        // Putar efek suara cocok
+        if (correctSoundRef.current) {
+          correctSoundRef.current.play().catch(e => console.log("Audio play error:", e));
+        }
+        
         // Tambahkan ke pasangan yang sudah cocok
         setMatchedPairs(prev => [...prev, { ...selectedPair }]);
-      }
-
-      // Reset pilihan
-      setTimeout(() => {
-        setSelectedPair({ arab: null, meaning: null });
-      }, 500);
-
-      // Jika semua sudah dicocokkan, lanjut ke soal berikutnya
-      if (matchedPairs.length + (isCorrect ? 1 : 0) === question.pairs.length) {
+        
+        // Reset pilihan
         setTimeout(() => {
-          onAnswer(true);
-        }, 1000);
+          setSelectedPair({ arab: null, meaning: null, audio: null });
+        }, 500);
+        
+        // Jika semua sudah dicocokkan, lanjut ke soal berikutnya
+        if (matchedPairs.length + 1 === question.pairs.length) {
+          setTimeout(() => {
+            onAnswer(true);
+          }, 1500);
+        }
+      } else {
+        // Jika tidak cocok, reset pilihan setelah jeda
+        setTimeout(() => {
+          setSelectedPair({ arab: null, meaning: null, audio: null });
+        }, 800);
       }
     }
-  }, [selectedPair]);
+  }, [selectedPair, matchedPairs, question.pairs, onAnswer]);
+
+  // Fungsi untuk memutar audio
+  const playAudio = (audioSrc) => {
+    if (!audioSrc) return;
+    
+    const audio = new Audio(audioSrc);
+    audio.play().catch(e => console.log("Audio play error:", e));
+  };
 
   return (
     <div className="mb-6 p-4 bg-purple-700 rounded-lg shadow-md">
@@ -104,21 +208,36 @@ const MatchQuestion = ({ question, onAnswer }) => {
       
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          {shuffledArabs.map((arab, i) => {
-            const isMatched = matchedPairs.find(p => p.arab === arab);
+          {shuffledArabs.map((item, i) => {
+            const isMatched = matchedPairs.find(p => p.arab === item.arab);
+            const isSelected = selectedPair.arab === item.arab;
+            
             return (
               <div
                 key={`arab-${i}`}
-                onClick={() => !isMatched && handleArabClick(arab)}
-                className={`p-3 rounded-lg cursor-pointer text-center ${
+                onClick={() => !isMatched && handleArabClick(item.arab, item.audio)}
+                className={`p-3 rounded-lg cursor-pointer text-center relative ${
                   isMatched 
                     ? "bg-green-500 text-white" 
-                    : selectedPair.arab === arab
+                    : isSelected
                     ? "bg-blue-500 text-white"
                     : "bg-purple-600 hover:bg-purple-500 text-white"
                 }`}
               >
-                {arab}
+                <div className="flex justify-between items-center">
+                  <span className="flex-grow text-center">{item.arab}</span>
+                  {item.audio && (
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        playAudio(item.audio);
+                      }}
+                      className="ml-2 w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center"
+                    >
+                      ▶
+                    </button>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -127,6 +246,8 @@ const MatchQuestion = ({ question, onAnswer }) => {
         <div className="space-y-2">
           {shuffledMeanings.map((meaning, i) => {
             const isMatched = matchedPairs.find(p => p.meaning === meaning);
+            const isSelected = selectedPair.meaning === meaning;
+            
             return (
               <div
                 key={`meaning-${i}`}
@@ -134,7 +255,7 @@ const MatchQuestion = ({ question, onAnswer }) => {
                 className={`p-3 rounded-lg cursor-pointer ${
                   isMatched 
                     ? "bg-green-500 text-white" 
-                    : selectedPair.meaning === meaning
+                    : isSelected
                     ? "bg-blue-500 text-white"
                     : "bg-purple-600 hover:bg-purple-500 text-white"
                 }`}
@@ -145,6 +266,9 @@ const MatchQuestion = ({ question, onAnswer }) => {
           })}
         </div>
       </div>
+      
+      {/* Audio efek untuk pasangan cocok */}
+      <audio ref={correctSoundRef} src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" />
     </div>
   );
 };
@@ -158,13 +282,18 @@ const Game = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [gameCompleted, setGameCompleted] = useState(false);
+  const successAudioRef = useRef(null);
 
   const surahData = dataSurah[surah];
   const words = surahData?.words || [];
 
   useEffect(() => {
     if (words.length > 0) {
-      setVisibleWords([{ arabic: words[0].arab, arti: words[0].meaning }]);
+      setVisibleWords([{ 
+        arabic: words[0].arab, 
+        arti: words[0].meaning,
+        audio: words[0].audio
+      }]);
     }
     const quiz = generateQuiz(surah, 10);
     setQuestions(quiz);
@@ -181,10 +310,13 @@ const Game = () => {
         words.slice(0, nextIndex + 1).map((w) => ({
           arabic: w.arab,
           arti: w.meaning,
+          audio: w.audio
         }))
       );
     } else {
       setIsLearningDone(true);
+      // Putar suara sukses saat selesai belajar
+      successAudioRef.current?.play();
     }
   };
 
@@ -197,13 +329,19 @@ const Game = () => {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setGameCompleted(true);
+      // Putar suara sukses saat selesai kuis
+      successAudioRef.current?.play();
     }
   };
 
   const resetGame = () => {
     setIsLearningDone(false);
     setCurrentIndex(0);
-    setVisibleWords([{ arabic: words[0].arab, arti: words[0].meaning }]);
+    setVisibleWords([{ 
+      arabic: words[0].arab, 
+      arti: words[0].meaning,
+      audio: words[0].audio
+    }]);
     setCurrentQuestion(0);
     setScore(0);
     setGameCompleted(false);
@@ -235,7 +373,11 @@ const Game = () => {
               >
                 <p className="text-3xl mb-2">{w.arabic}</p>
                 <p className="bg-purple-500 py-2 rounded text-lg">{w.arti}</p>
-                <button className="absolute right-4 top-4 text-white">▶</button>
+                {w.audio && (
+                  <div className="absolute right-4 top-4">
+                    <AudioButton audioSrc={w.audio} />
+                  </div>
+                )}
               </div>
             ))}
 
@@ -302,8 +444,17 @@ const Game = () => {
           </div>
         )}
       </div>
+      
+      {/* Audio efek untuk sukses */}
+      <audio ref={successAudioRef} src="/sounds/success.mp3" />
     </div>
   );
 };
 
 export default Game;
+
+// Tambahkan fungsi shuffle di awal file, setelah import
+function shuffle(array) {
+  const newArray = [...array];
+  return newArray.sort(() => Math.random() - 0.5);
+}
