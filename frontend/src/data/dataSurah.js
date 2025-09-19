@@ -104,13 +104,13 @@ const dataSurah = {
         ayat: "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
         arab: "غَاسِقٍ",
         meaning: "kegelapan",
-        audio: "https://audio.qurancdn.com/wbw/113_003_002.mp3"
+        audio: "https://audio.qurancdn.com/wbw/113_003_003.mp3"
       },
       {
         ayat: "وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ",
         arab: "النَّفَّاثَاتِ",
         meaning: "peniup",
-        audio: "https://audio.qurancdn.com/wbw/113_004_002.mp3"
+        audio: "https://audio.qurancdn.com/wbw/113_004_003.mp3"
       },
       {
         ayat: "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",

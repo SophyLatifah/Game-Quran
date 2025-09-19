@@ -12,7 +12,14 @@ const Dashboard = () => {
   const [showMateri, setShowMateri] = useState(false); // ✅ popup materi
   const [showPopup, setShowPopup] = useState(false);   // popup pilih bahasa
   const [showIntro, setShowIntro] = useState(false);   // popup intro soleh
+  const [selectedSurah, setSelectedSurah] = useState("an-nas"); // Surah yang dipilih
   const navigate = useNavigate(); 
+
+  // Fungsi untuk memilih surah dan menampilkan popup materi
+  const handleSurahSelect = (surah) => {
+    setSelectedSurah(surah);
+    setShowMateri(true);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center ">
@@ -29,7 +36,7 @@ const Dashboard = () => {
         <div className="flex flex-col items-center mt-10">
           <div
             className="relative bg-orange-500 rounded-full p-6 w-28 h-28 flex items-center justify-center shadow-lg cursor-pointer"
-            onClick={() => setShowMateri(true)} // buka popup materi dulu
+            onClick={() => handleSurahSelect("an-nas")}
           >
             <span className="text-white text-4xl">👳‍♂️</span>
             <div className="absolute -top-5 bg-blue-500 text-white text-sm px-3 py-1 rounded-full shadow">
@@ -41,7 +48,10 @@ const Dashboard = () => {
 
         {/* Surah lainnya */}
         <div className="grid grid-cols-2 gap-6 justify-items-center mt-10 px-4">
-          <div className="bg-purple-800/90 rounded-xl p-4 w-32 text-center text-white shadow-md">
+          <div 
+            className="bg-purple-800/90 rounded-xl p-4 w-32 text-center text-white shadow-md cursor-pointer hover:bg-purple-700/90 transition-colors"
+            onClick={() => handleSurahSelect("al-falaq")}
+          >
             🌤️
             <p className="mt-2 font-semibold">Al-Falaq</p>
           </div>
@@ -85,7 +95,7 @@ const Dashboard = () => {
           <IntroSoleh 
             onMulai={() => {
               setShowIntro(false); 
-              navigate("/game/an-nas"); // masuk game
+              navigate(`/game/${selectedSurah}`); // masuk game dengan surah yang dipilih
             }} 
           />
         )}
