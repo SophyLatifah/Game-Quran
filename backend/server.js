@@ -41,6 +41,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import db from "./db.js";
+import memorizedRoutes from "./routes/memorizedRoutes.js";
 
 import scoreRoutes from "./routes/scoreRoutes.js";
 
@@ -51,6 +52,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/score", scoreRoutes);
+app.use("/api/memorized", memorizedRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend running!" });
