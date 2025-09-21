@@ -10,7 +10,9 @@ const PopupMateri = ({ onClose, onMulai }) => {
           <div className="text-purple-400 text-3xl mb-2">✦</div>
 
           {/* Judul */}
-          <h2 className="text-lg font-bold text-orange-400 mb-2">An-Nas</h2>
+          <h2 className="text-lg font-bold text-orange-400 mb-2">
+            
+          </h2>  
           <p className="text-sm mb-6">
             Pelajari kosakata baru dari materi ini.
           </p>

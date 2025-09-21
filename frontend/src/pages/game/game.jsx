@@ -509,6 +509,10 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { generateQuiz } from "../../utils/generateQuestions";
 import dataSurah from "../../data/dataSurah"; 
+import Benar from "../../assets/audio/benar.mp3";
+import Salah from "../../assets/audio/salah.mp3";
+import { Link } from "react-router-dom";
+
 
 // Komponen untuk tombol audio
 const AudioButton = ({ audioSrc }) => {
@@ -895,6 +899,11 @@ const Game = () => {
             >
               ULANGI LAGI
             </button>
+            <Link to="/dashboard">
+              <button className="mt-4 w-full py-3 rounded-lg bg-orange-500 text-white text-lg font-semibold shadow-md">
+                SELESAI
+              </button>
+            </Link>
           </div>
         ) : (
           <div className="text-white">
