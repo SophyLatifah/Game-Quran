@@ -464,6 +464,11 @@ import dataSurah from "../../data/dataSurah";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+// Import local audio files
+import correctSound from "../../assets/audio/benar.mp3";
+import wrongSound from "../../assets/audio/salah.mp3";
+import successSound from "../../assets/audio/berhasil.mp3";
+
 // API Base URL
 const API_BASE = "http://localhost:5000/api";
 
@@ -565,8 +570,9 @@ const MultipleChoiceQuestion = ({ question, onAnswer }) => {
         ))}
       </ul>
       
-      <audio ref={correctAudioRef} src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" />
-      <audio ref={wrongAudioRef} src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3" />
+      {/* Local audio files */}
+      <audio ref={correctAudioRef} src={correctSound} preload="auto" />
+      <audio ref={wrongAudioRef} src={wrongSound} preload="auto" />
     </div>
   );
 };
@@ -701,7 +707,8 @@ const MatchQuestion = ({ question, onAnswer }) => {
         </div>
       </div>
       
-      <audio ref={correctSoundRef} src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" />
+      {/* Local audio for match correct */}
+      <audio ref={correctSoundRef} src={correctSound} preload="auto" />
     </div>
   );
 };
@@ -719,7 +726,10 @@ const Game = () => {
   const [savingData, setSavingData] = useState(false);
   const [saveStatus, setSaveStatus] = useState("");
   const [memorizedWordsCount, setMemorizedWordsCount] = useState(0);
+  
+  // Audio refs for game events
   const successAudioRef = useRef(null);
+  const learningCompleteAudioRef = useRef(null);
 
   const surahData = dataSurah[surah];
   const words = useMemo(() => surahData?.words || [], [surahData]);
@@ -745,6 +755,8 @@ const Game = () => {
     setMemorizedWordsCount(0);
   }, [surah, words]);
 
+  // Play click sound for buttons - REMOVED (no click sound needed)
+
   const handleNext = () => {
     if (currentIndex < words.length - 1) {
       const nextIndex = currentIndex + 1;
@@ -758,7 +770,10 @@ const Game = () => {
       );
     } else {
       setIsLearningDone(true);
-      successAudioRef.current?.play();
+      // Play learning complete sound
+      if (learningCompleteAudioRef.current) {
+        learningCompleteAudioRef.current.play().catch(() => {});
+      }
     }
   };
 
@@ -771,13 +786,16 @@ const Game = () => {
 
   const goToNextQuestion = () => {
     if (!canProceed) return;
+    
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
       setCanProceed(false);
     } else {
       setGameCompleted(true);
-      successAudioRef.current?.play();
-      // Auto save when game completed
+      // Play game complete success sound
+      if (successAudioRef.current) {
+        successAudioRef.current.play().catch(() => {});
+      }
       handleGameComplete();
     }
   };
@@ -817,7 +835,9 @@ const Game = () => {
   // Save score to backend
   const saveScore = async () => {
     try {
-      const user_id = 1; // TODO: Get from auth system
+      const userData = JSON.parse(localStorage.getItem("userData"));
+      const user_id = userData?.id || 1; // TODO: Get from auth system
+      
       const surah_key = surah;
       
       const response = await axios.post(`${API_BASE}/score`, {
@@ -838,7 +858,8 @@ const Game = () => {
   // Save memorized words to backend
   const saveMemorizedWords = async () => {
     try {
-      const user_id = 1; // TODO: Get from auth system
+      const userData = JSON.parse(localStorage.getItem("userData"));
+      const user_id = userData?.id || 1; // TODO: Get from auth system
       const surah_key = surah;
       
       // Save words that were shown in learning phase (up to 5 words)
@@ -898,7 +919,10 @@ const Game = () => {
           <p className="text-sm text-gray-300 mb-4">
             Pastikan nama surah sesuai dengan yang ada di dataSurah.js
           </p>
-          <Link to="/dashboard" className="bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+          <Link 
+            to="/dashboard" 
+            className="bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+          >
             Kembali ke Dashboard
           </Link>
         </div>
@@ -918,7 +942,7 @@ const Game = () => {
             {visibleWords.map((w, idx) => (
               <div
                 key={idx}
-                className="bg-purple-700 rounded-xl p-4 w-full mb-4 text-center relative shadow-lg text-white"
+                className="bg-purple-700 rounded-xl p-4 w-full mb-4 text-center relative shadow-lg text-white animate-fadeIn"
               >
                 <p className="text-3xl mb-2">{w.arabic}</p>
                 <p className="bg-purple-500 py-2 rounded text-lg">{w.arti}</p>
@@ -932,7 +956,7 @@ const Game = () => {
 
             <button
               onClick={handleNext}
-              className={`mt-4 w-full py-3 rounded-lg text-white text-lg font-semibold shadow-md transition-colors ${
+              className={`mt-4 w-full py-3 rounded-lg text-white text-lg font-semibold shadow-md transition-all transform hover:scale-105 active:scale-95 ${
                 currentIndex < words.length - 1
                   ? "bg-sky-400 hover:bg-sky-500"
                   : "bg-orange-500 hover:bg-orange-600"
@@ -949,18 +973,18 @@ const Game = () => {
               </div>
               <div className="w-full bg-purple-600 rounded-full h-2">
                 <div 
-                  className="bg-orange-400 h-2 rounded-full transition-all duration-300"
+                  className="bg-orange-400 h-2 rounded-full transition-all duration-500 ease-out"
                   style={{ width: `${((currentIndex + 1) / words.length) * 100}%` }}
                 ></div>
               </div>
             </div>
           </div>
         ) : gameCompleted ? (
-          <div className="text-white text-center">
+          <div className="text-white text-center animate-fadeIn">
             <h1 className="text-2xl font-bold mb-4">Kuis Selesai!</h1>
             
             {/* Score Display */}
-            <div className="bg-purple-700 rounded-xl p-6 mb-6">
+            <div className="bg-purple-700 rounded-xl p-6 mb-6 transform transition-all duration-500 hover:scale-105">
               <p className="text-xl mb-2">Skor Kamu:</p>
               <p className="text-4xl font-bold text-yellow-400">{score} / {questions.length}</p>
               <p className="text-lg mt-2 text-gray-300">
@@ -978,7 +1002,7 @@ const Game = () => {
                 </p>
                 
                 {memorizedWordsCount > 0 && (
-                  <p className="text-yellow-300 text-sm">
+                  <p className="text-yellow-300 text-sm animate-pulse">
                     {memorizedWordsCount} kata baru ditambahkan ke hafalan
                   </p>
                 )}
@@ -1005,19 +1029,23 @@ const Game = () => {
               <button
                 onClick={resetGame}
                 disabled={savingData}
-                className="w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 disabled:bg-gray-500 text-white text-lg font-semibold shadow-md transition-colors"
+                className="w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 disabled:bg-gray-500 text-white text-lg font-semibold shadow-md transition-all transform hover:scale-105 active:scale-95"
               >
                 ULANGI LAGI
               </button>
               
               <Link to="/hafal">
-                <button className="w-full py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white text-lg font-semibold shadow-md transition-colors">
+                <button 
+                  className="w-full py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white text-lg font-semibold shadow-md transition-all transform hover:scale-105 active:scale-95"
+                >
                   LIHAT HAFALAN SAYA
                 </button>
               </Link>
               
               <Link to="/dashboard">
-                <button className="w-full py-3 mt-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-lg font-semibold shadow-md transition-colors">
+                <button 
+                  className="mt-3 w-full py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-lg font-semibold shadow-md transition-all transform hover:scale-105 active:scale-95"
+                >
                   KEMBALI KE MENU
                 </button>
               </Link>
@@ -1038,7 +1066,7 @@ const Game = () => {
             <div className="mb-4">
               <div className="w-full bg-purple-600 rounded-full h-2">
                 <div 
-                  className="bg-yellow-400 h-2 rounded-full transition-all duration-300"
+                  className="bg-yellow-400 h-2 rounded-full transition-all duration-500 ease-out"
                   style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
                 ></div>
               </div>
@@ -1072,7 +1100,7 @@ const Game = () => {
                 {canProceed && (
                   <button
                     onClick={goToNextQuestion}
-                    className="mt-4 w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold shadow-md transition-colors"
+                    className="mt-4 w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold shadow-md transition-all transform hover:scale-105 active:scale-95"
                   >
                     {currentQuestion < questions.length - 1 ? "LANJUTKAN" : "SELESAI"}
                   </button>
@@ -1081,9 +1109,11 @@ const Game = () => {
             )}
           </div>
         )}
+        
+        {/* Audio elements for game events */}
+        <audio ref={successAudioRef} src={successSound} preload="auto" />
+        <audio ref={learningCompleteAudioRef} src={successSound} preload="auto" />
       </div>
-      
-      <audio ref={successAudioRef} src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" />
     </div>
   );
 };
@@ -1094,3 +1124,15 @@ function shuffle(array) {
   const newArray = [...array];
   return newArray.sort(() => Math.random() - 0.5);
 }
+
+// Add CSS animation classes (put this in your global CSS or add to index.css)
+/*
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+*/

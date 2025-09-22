@@ -119,7 +119,63 @@ const dataSurah = {
         audio: "https://audio.qurancdn.com/wbw/113_005_003.mp3"
       }
     ]
+  },
+
+  "al-ikhlas": {
+    title: "Al-Ikhlas",
+    xp: 20,
+    words:[
+      {
+        ayat: "قُلْ هُوَ اللَّهُ أَحَدٌ",
+        arab: "هُوَ",
+        meaning: "Dia (Allah)",
+        audio: "https://audio.qurancdn.com/wbw/112_001_002.mp3"
+      },
+      {
+        ayat: "قُلْ هُوَ اللَّهُ أَحَدٌ",
+        arab: "اللَّهُ",
+        meaning: "Allah",
+        audio: "https://audio.qurancdn.com/wbw/112_001_003.mp3"
+      },
+      {
+        ayat: "قُلْ هُوَ اللَّهُ أَحَدٌ",
+        arab: "أَحَدٌ",
+        meaning: "Maha Esa",
+        audio: "https://audio.qurancdn.com/wbw/112_001_004.mp3"
+      },
+      {
+        ayat: "اللَّهُ الصَّمَدُ",
+        arab: "الصَّمَدُ",
+        meaning: "tempat bergantung",
+        audio: "https://audio.qurancdn.com/wbw/112_002_002.mp3"
+      },
+      {
+        ayat: "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+        arab: "لَمْ",
+        meaning: "tidak",
+        audio: "https://audio.qurancdn.com/wbw/112_003_001.mp3"
+      },
+      {
+        ayat: "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+        arab: "يَلِدْ",
+        meaning: "beranak",
+        audio: "https://audio.qurancdn.com/wbw/112_003_002.mp3"
+      },
+      {
+        ayat: "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+        arab: "وَلَمْ",
+        meaning: "dan tidak pula",
+        audio: "https://audio.qurancdn.com/wbw/112_003_003.mp3"
+      },
+      {
+        ayat: "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+        arab: "يُولَدْ",
+        meaning: "diperanakkan",
+        audio: "https://audio.qurancdn.com/wbw/112_003_004.mp3"
+      }
+    ]
   }
+   
 };
 
 export default dataSurah;

@@ -132,7 +132,8 @@ function Hafal() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const user_id = 1; // TODO: Get from auth system
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        const user_id = userData?.id || 1; // TODO: Get from auth system
         
         // Fetch scores and memorized words
         const [scoresResponse, wordsResponse] = await Promise.all([

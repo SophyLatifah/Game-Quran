@@ -42,8 +42,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import db from "./db.js";
 import memorizedRoutes from "./routes/memorizedRoutes.js";
-
+import authRoutes from "./routes/authRoutes.js";
 import scoreRoutes from "./routes/scoreRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -51,7 +52,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/auth", authRoutes);
 app.use("/api/score", scoreRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/memorized", memorizedRoutes);
 
 app.get("/", (req, res) => {
