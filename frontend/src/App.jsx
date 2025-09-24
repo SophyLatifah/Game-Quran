@@ -29,6 +29,9 @@ import Game from "./pages/game/game.jsx";
 import Navbar from "./component/navbar.jsx";
 import NavGame from "./component/navbarGame.jsx";
 
+// import admin panel
+import AdminPanel from "./pages/admin/adminPanel.jsx";
+
 
 function App () {
   return (
@@ -90,6 +93,9 @@ function App () {
         <Route path="/game/:surah" element={
           <Game />
         } />
+
+        {/* ADMIN */}
+        <Route path="/admin" element={ <AdminPanel />} />
 
       </Routes>
     </>
