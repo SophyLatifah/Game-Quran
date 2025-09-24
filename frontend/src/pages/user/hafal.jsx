@@ -173,11 +173,11 @@ function Hafal() {
     return memorizedWords.length;
   };
 
-  const getAverageScore = () => {
-    if (scores.length === 0) return 0;
-    const total = scores.reduce((sum, score) => sum + score.percentage, 0);
-    return Math.round(total / scores.length);
-  };
+  // const getAverageScore = () => {
+  //   if (scores.length === 0) return 0;
+  //   const total = scores.reduce((sum, score) => sum + score.percentage, 0);
+  //   return Math.round(total / scores.length);
+  // };
 
   const getBestScore = () => {
     if (scores.length === 0) return 0;
@@ -211,10 +211,10 @@ function Hafal() {
                     <p className="text-2xl font-bold text-yellow-300">{getTotalWordsCount()}</p>
                     <p className="text-xs text-gray-300">Kata Dihafal</p>
                   </div>
-                  <div className="text-center">
+                  {/* <div className="text-center">
                     <p className="text-2xl font-bold text-blue-300">{getAverageScore()}%</p>
                     <p className="text-xs text-gray-300">Rata-rata</p>
-                  </div>
+                  </div> */}
                   <div className="text-center">
                     <p className="text-2xl font-bold text-green-300">{getBestScore()}%</p>
                     <p className="text-xs text-gray-300">Terbaik</p>

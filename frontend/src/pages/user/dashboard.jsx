@@ -18,7 +18,8 @@ const Dashboard = () => {
     { id: "an-nas", name: "An-Nas", icon: "👳‍♂️", gradient: "from-orange-500 to-orange-700" },
     { id: "al-falaq", name: "Al-Falaq", icon: "🌤️", gradient: "from-purple-500 to-purple-700" },
     { id: "al-ikhlas", name: "Al-Ikhlas", icon: "☝️", gradient: "from-blue-500 to-blue-700" },
-    { id: "al-lahab", name: "Al-Lahab", icon: "📖", gradient: "from-green-500 to-green-700" }
+    { id: "al-lahab", name: "Al-Lahab", icon: "📖", gradient: "from-green-500 to-green-700" },
+    
   ];
 
   const handleSurahSelect = (surah) => {
@@ -67,6 +68,11 @@ const Dashboard = () => {
           <div className="flex justify-center">
             <Card surah={surahs[3]} />
           </div>
+          {/* 2 */}
+          {/* <div className="grid grid-cols-2 gap-4">
+            <Card surah={surahs[1]} />
+            <Card surah={surahs[2]} />
+          </div> */}
         </div>
 
         <div className="mt-auto mb-20"></div>

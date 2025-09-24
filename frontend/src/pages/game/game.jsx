@@ -522,17 +522,20 @@ const MultipleChoiceQuestion = ({ question, onAnswer }) => {
   const correctAudioRef = useRef(null);
   const wrongAudioRef = useRef(null);
 
+  // untuk mereset state saat soal berubah
   useEffect(() => {
     setSelectedOption(null);
     setIsAnswered(false);
   }, [question]);
 
+  //
   const handleOptionClick = (option) => {
     if (isAnswered) return;
     
-    setSelectedOption(option);
-    setIsAnswered(true);
+    setSelectedOption(option); // unutk menyimpan opsi yang dipilih
+    setIsAnswered(true); // menandai bahwa soal sudah dijawab
     
+    // cek jawaban benar atau salah
     const isCorrect = option === question.correct;
     if (isCorrect) {
       correctAudioRef.current?.play();
@@ -916,9 +919,9 @@ const Game = () => {
         <div className="p-6 text-white text-center">
           <h1 className="text-xl font-bold mb-4">Surah Tidak Ditemukan</h1>
           <p className="mb-4">Surah <b>"{surah}"</b> tidak ditemukan di data.</p>
-          <p className="text-sm text-gray-300 mb-4">
+          {/* <p className="text-sm text-gray-300 mb-4">
             Pastikan nama surah sesuai dengan yang ada di dataSurah.js
-          </p>
+          </p> */}
           <Link 
             to="/dashboard" 
             className="bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
