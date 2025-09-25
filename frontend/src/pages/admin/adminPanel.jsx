@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 const API_BASE = "http://localhost:5000/api";
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
-  //const [userStats, setUserStats] = useState([]);
+  const [userStats, setUserStats] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [selectedPeriod, setSelectedPeriod] = useState('all');
